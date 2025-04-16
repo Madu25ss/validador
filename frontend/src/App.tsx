@@ -1,8 +1,10 @@
+import ValidadorCpf from "./pages/ValidadorCpf"
+
 function App() {
   
   return (
     <>
-    <p>página inicial</p>
+    <ValidadorCpf/>
     </>
   )
 }
