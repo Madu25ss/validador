@@ -22,3 +22,13 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+Todo: 
+- terminar o componente de input: 
+    criar o texto em cima 
+    alinhar botão e colocar dentro do mesmo componente
+    criar o componenente de validação e a lógica dele: icons e cores
+-Colocar o componente dentro do tab de CPF
+- fazer cpf funcionar e ser validados
+- refatoração para as outros abas.
