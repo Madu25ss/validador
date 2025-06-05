@@ -26,9 +26,9 @@ dist-ssr
 
 Todo: 
 - terminar o componente de input: 
-    criar o texto em cima 
-    alinhar botão e colocar dentro do mesmo componente
+    criar o texto em cima e embaixo
+    texto de baixo: como fazer o <link> levar para outra página?, hover e cursor pointer
     criar o componenente de validação e a lógica dele: icons e cores
--Colocar o componente dentro do tab de CPF
+
 - fazer cpf funcionar e ser validados
-- refatoração para as outros abas.
+- criar validação para outras abas
