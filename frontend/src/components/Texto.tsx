@@ -1,17 +1,19 @@
-import { Link } from "@mui/material";
+
 import React from "react";
+import { Link } from "react-router-dom";
 
 type TextoProps = {
-  name: string;
+  name: string,
+  path: string
 };
 
 const TextoLink = (props: TextoProps) => {
   return (
     <>
-      <div className="w-full">
+      <div className="w-full mt-8">
         <div>
-          <h3 className="text-base">
-            Ou <Link style={{ color: "#007A55" }}>{`Gerar ${props.name}`}</Link>
+          <h3 className="text-base text-zinc-600">
+            Ou <Link className="cursor-pointer text-teal-700 hover:underline" to={"/PagGerador"}> {`Gerar ${props.name}`}</Link>
           </h3>
         </div>
       </div>

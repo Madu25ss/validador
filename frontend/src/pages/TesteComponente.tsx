@@ -6,6 +6,7 @@ import Tab from "@mui/material/Tab";
 import { Box } from "@mui/material";
 import React from "react";
 import ValidadorCpf from "./ValidadorCpf";
+import ValidadorCnpj from "./ValidadorCnpj";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -58,7 +59,6 @@ export default function BasicTabs() {
           value={value}
           onChange={handleChange}
           aria-label="basic tabs"
-          indicatorColor="customGreen"
           sx={{
             "& .MuiTabs-indicator": { backgroundColor: "#00786F" },
           }}
@@ -91,12 +91,15 @@ export default function BasicTabs() {
           />
         </Tabs>
       </Box>
+
       <CustomTabPanel value={value} index={0}>
         <ValidadorCpf />
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={1}>
-        <ValidadorCpf />
+        <ValidadorCnpj />
       </CustomTabPanel>
+
       <CustomTabPanel value={value} index={2}>
         Item Three
       </CustomTabPanel>

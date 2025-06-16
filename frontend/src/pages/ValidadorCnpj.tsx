@@ -4,12 +4,11 @@ import Input from "../components/Input";
 import TextoLink from "../components/Texto";
 import TextoDesc from "../components/TextoDesc";
 
-const ValidadorCpf = () => {
+const ValidadorCnpj = () => {
   const [cpf, setCpf] = useState<string>("");
-  const [resultado, setResultado] = useState<boolean | undefined>(undefined);
 
   const validaCpf = () => {
-    // console.log(`cpf original ${cpf}`);
+    console.log(`cpf original ${cpf}`);
 
     // const cpfNumber = Number(cpf);
     // console.log(typeof cpfNumber);
@@ -21,7 +20,7 @@ const ValidadorCpf = () => {
       const digito2 = criaDigito(cpfParcial + digito1);
 
       const novoCpf = cpfParcial + digito1 + digito2;
-      // console.log(`CPF Validado: ${novoCpf}`);
+      console.log(`CPF Validado: ${novoCpf}`);
       return novoCpf === cpf;
     }
 
@@ -40,30 +39,26 @@ const ValidadorCpf = () => {
       return String(digito);
     }
 
-    setResultado(validacao());
+    let resultado = validacao();
 
-    // console.log(`CPF `, resultado == true ? `Válido` : `Inválido`);
-    
+    console.log(`CPF `, resultado == true ? `Válido` : `Inválido`);
   };
-  
-  
-  
+
   return (
     <>
-      <TextoDesc name="CPF" />
+      <TextoDesc name="CNPJ" />
       <Input
-        name={"CPF"}
+        name={"CNPJ"}
         value={cpf}
         onChange={(text: string) => setCpf(text)}
-        maxLength={11}
-        placeholder="Digite o CPF"
-        widthValue={20}
-        validacao={resultado}
+        maxLength={14}
+        placeholder="Digite o CNPJ"
+        widthValue={25}
       />
       <Botao onClick={validaCpf} />
-      <TextoLink name={"CPF"} path={"/PagGerador"}/>
+      <TextoLink name={"CNPJ"} path={"/PagGerador"}/>
     </>
   );
 };
 
-export default ValidadorCpf;
+export default ValidadorCnpj;

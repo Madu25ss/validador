@@ -1,3 +1,5 @@
+import Validacao from "./Validacao";
+
 type InputProps = {
   name: string;
   placeholder?: string;
@@ -6,12 +8,13 @@ type InputProps = {
   disabled?: boolean;
   maxLength: number;
   widthValue: number;
+  validacao?: boolean;
 };
 
 const Input = (props: InputProps) => {
   return (
     <div className=" flex w-full">
-      <div className="flex flex-row border border-solid border-red-800 w-full space-x-4 py-2">
+      <div className="flex flex-row w-full space-x-2 py-2">
         <div
           className="flex flex-col"
           style={{ width: `${props.widthValue}%` }}
@@ -33,10 +36,9 @@ const Input = (props: InputProps) => {
           />
         </div>
         {/* só aparecer após clicar o botão */}
-        <div className="flex flex-col justify-end text-xs border w-fit pr-2">
-          <div className="flex flex-row space-x-2 pt-1">
-            <div className="">icon</div>
-            <div className="">Validação</div>
+        <div className="flex flex-col justify-end text-xs w-fit pr-2">
+          <div className="flex flex-row space-x-1">
+            <Validacao validacao={props.validacao}/>
           </div>
         </div>
       </div>
