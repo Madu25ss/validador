@@ -8,6 +8,7 @@ import React from "react";
 import ValidadorCpf from "./ValidadorCpf";
 import ValidadorCnpj from "./ValidadorCnpj";
 
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -75,7 +76,7 @@ export default function BasicTabs() {
             {...a11yProps(1)}
           />
           <Tab
-            label="RG"
+            label="RG" disabled
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
             {...a11yProps(2)}
           />
@@ -101,7 +102,7 @@ export default function BasicTabs() {
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-        Item Three
+      
       </CustomTabPanel>
     </Box>
   );

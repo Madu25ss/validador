@@ -25,11 +25,10 @@ dist-ssr
 
 
 Todo: 
-- terminar o componente de input: 
-    criar o componenente de validação e a lógica dele: icons e cores
 
-- fazer cpf funcionar e ser validados
 - criar validação para outras abas
 criar back para quando o validador for clicado em uma aba (cnpj), a página de gerador ser aberta na aba do cnpj
 - fazer o gerador consumir apis de geração de credenciais
 - o validador também pode consumir apis
+
+-Encontrar apis ou cálculo do dígito para rg, cnh e renavam

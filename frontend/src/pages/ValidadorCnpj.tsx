@@ -5,43 +5,45 @@ import TextoLink from "../components/Texto";
 import TextoDesc from "../components/TextoDesc";
 
 const ValidadorCnpj = () => {
-  const [cpf, setCpf] = useState<string>("");
+const [cnpj, setCnpj] = useState<string>("");
+  const [resultado, setResultado] = useState<boolean | undefined>(undefined);
 
-  const validaCpf = () => {
-    console.log(`cpf original ${cpf}`);
+  const validaCnpj = () => {
+    console.log(`cpf original ${cnpj}`);
 
     // const cpfNumber = Number(cpf);
     // console.log(typeof cpfNumber);
 
     function validacao() {
       //tira os digitos verificadores, faz o cálculo, adiciona no novoCpf e compara (true, false)
-      const cpfParcial = cpf.slice(0, -2);
-      const digito1 = criaDigito(cpfParcial);
-      const digito2 = criaDigito(cpfParcial + digito1);
+      const cnpjParcial = cnpj.slice(0, 12);
+      console.log(cnpjParcial);
+      const digito1 = criaDigito(cnpjParcial, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+      const digito2 = criaDigito(cnpjParcial + digito1, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
+      console.log(digito1, digito2);
 
-      const novoCpf = cpfParcial + digito1 + digito2;
-      console.log(`CPF Validado: ${novoCpf}`);
-      return novoCpf === cpf;
+      const novoCnpj = cnpjParcial + digito1 + digito2;
+      console.log(`CNPJ Validado: ${novoCnpj}`);
+      return novoCnpj === cnpj;
     }
 
-    function criaDigito(cpfParcial: any) {
-      const cpfArray = Array.from(cpfParcial);
-      let regressivo = cpfArray.length + 1;
+    function criaDigito(cnpjParcial: any, pesos: number[]) {
+      const cnpjArray = Array.from(cnpjParcial).map(Number);
+  
 
-      let total = cpfArray.reduce((ac: number, val) => {
-        ac += regressivo * Number(val);
-        regressivo--;
-        return ac;
+      let total = cnpjArray.reduce((ac: number, num, i) => {
+        return ac + num * pesos[i];
       }, 0);
 
-      let digito = 11 - (total % 11);
-      digito > 9 ? (digito = 0) : digito;
+      const resto = total % 11;
+      const digito = resto < 2 ? 0 : 11 - resto;
       return String(digito);
     }
 
-    let resultado = validacao();
+    setResultado(validacao());
 
-    console.log(`CPF `, resultado == true ? `Válido` : `Inválido`);
+    console.log(`CNPJ `, resultado == true ? `Válido` : `Inválido`);
+    
   };
 
   return (
@@ -49,13 +51,14 @@ const ValidadorCnpj = () => {
       <TextoDesc name="CNPJ" />
       <Input
         name={"CNPJ"}
-        value={cpf}
-        onChange={(text: string) => setCpf(text)}
+        value={cnpj}
+        onChange={(text: string) => setCnpj(text)}
         maxLength={14}
         placeholder="Digite o CNPJ"
         widthValue={25}
+        validacao={resultado}
       />
-      <Botao onClick={validaCpf} />
+      <Botao onClick={validaCnpj} />
       <TextoLink name={"CNPJ"} path={"/PagGerador"}/>
     </>
   );
