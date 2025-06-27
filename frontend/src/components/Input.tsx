@@ -22,7 +22,7 @@ const Input = (props: InputProps) => {
           <label
             className="text-sm text-zinc-700"
             htmlFor="inputTexto"
-          >{`${props.name.toUpperCase()}`}</label>
+          >{`${props.name}`}</label>
           <input
             className="h-8 text-sm text-neutral-500 bg-white rounded border border-solid border-neutral-400 outline-0 focus:border-teal-800 px-2"
             type="text"

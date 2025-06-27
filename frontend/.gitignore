@@ -26,6 +26,11 @@ dist-ssr
 
 Todo: 
 
+= colocar a validação de cpf sem data de nascimento na apiCpf controller 
+= fazer oq for digitado nos inputs se encaixar em uma máscara
+
+
+
 - criar validação para outras abas
 criar back para quando o validador for clicado em uma aba (cnpj), a página de gerador ser aberta na aba do cnpj
 - fazer o gerador consumir apis de geração de credenciais
