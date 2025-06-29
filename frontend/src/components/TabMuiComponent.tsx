@@ -1,13 +1,9 @@
-import { useState } from "react";
-import Botao from "../components/Botao";
-import Input from "../components/Input";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Box } from "@mui/material";
 import React from "react";
 import ValidadorCpf from "./ValidadorCpf";
 import ValidadorCnpj from "./ValidadorCnpj";
-
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,7 +45,6 @@ export default function BasicTabs() {
     <Box
       sx={{
         width: "100%",
-        paddingRight: "16px",
         borderRadius: "8px",
         background: "#FAFAFA",
         boxShadow: "0px 6px 8px rgba(0, 0, 0, 0.2)",
@@ -64,7 +59,6 @@ export default function BasicTabs() {
             "& .MuiTabs-indicator": { backgroundColor: "#00786F" },
           }}
         >
-          {/* melhorar como as cores de texto estão sendo setadas nos componentes */}
           <Tab
             label="CPF"
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
@@ -76,19 +70,14 @@ export default function BasicTabs() {
             {...a11yProps(1)}
           />
           <Tab
-            label="RG" disabled
+            label="CNH"
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
             {...a11yProps(2)}
           />
           <Tab
-            label="CNH"
-            sx={{ "&.Mui-selected": { color: "#00786F" } }}
-            {...a11yProps(3)}
-          />
-          <Tab
             label="RENAVAM"
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
-            {...a11yProps(4)}
+            {...a11yProps(3)}
           />
         </Tabs>
       </Box>
@@ -101,9 +90,7 @@ export default function BasicTabs() {
         <ValidadorCnpj />
       </CustomTabPanel>
 
-      <CustomTabPanel value={value} index={2}>
-      
-      </CustomTabPanel>
+      <CustomTabPanel value={value} index={2}></CustomTabPanel>
     </Box>
   );
 }

@@ -1,5 +1,3 @@
-import Validacao from "./Validacao";
-
 type InputProps = {
   name: string;
   placeholder?: string;
@@ -9,12 +7,24 @@ type InputProps = {
   maxLength: number;
   widthValue: number;
   validacao?: boolean;
+  obrigatorio?: boolean;
+  inputVazio?: boolean;
 };
 
 const Input = (props: InputProps) => {
+  let validaCor;
+
+  if (props.obrigatorio == true) {
+    if (props.inputVazio == false) {
+      validaCor = `border-red-800`;
+    }
+  } else {
+    validaCor = `border-neutral-400`;
+  }
+
   return (
-    <div className=" flex w-full">
-      <div className="flex flex-row w-full space-x-2 py-2">
+    <div className=" flex w-full ">
+      <div className="flex flex-row w-full space-x-2">
         <div
           className="flex flex-col"
           style={{ width: `${props.widthValue}%` }}
@@ -24,7 +34,7 @@ const Input = (props: InputProps) => {
             htmlFor="inputTexto"
           >{`${props.name}`}</label>
           <input
-            className="h-8 text-sm text-neutral-500 bg-white rounded border border-solid border-neutral-400 outline-0 focus:border-teal-800 px-2"
+            className={`h-8 text-sm text-neutral-500 bg-white rounded border border-solid border-neutral-400 ${validaCor} outline-0 focus:border-teal-800 px-2 w-full`}
             type="text"
             id="inputTexto"
             name={props.name}
@@ -35,12 +45,12 @@ const Input = (props: InputProps) => {
             maxLength={props.maxLength}
           />
         </div>
-        {/* só aparecer após clicar o botão */}
-        <div className="flex flex-col justify-end text-xs w-fit pr-2">
+        {/* só aparecer após clicar no botão */}
+        {/* <div className="flex flex-col justify-end text-xs w-fit pr-2">
           <div className="flex flex-row space-x-1">
             <Validacao validacao={props.validacao}/>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

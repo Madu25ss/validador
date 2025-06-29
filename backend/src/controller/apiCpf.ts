@@ -26,7 +26,7 @@ try {
     }
   });
 } catch (error) {
-  console.error('Erro ao validar o CPF: ', error.message);
+  // console.error('Erro ao validar o CPF: ', error.message);
   res.status(500).json({error: 'Erro ao validar CPF'})
 }
 

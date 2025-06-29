@@ -26,14 +26,7 @@ dist-ssr
 
 Todo: 
 
-= colocar a validação de cpf sem data de nascimento na apiCpf controller 
-= fazer oq for digitado nos inputs se encaixar em uma máscara
-
-
-
-- criar validação para outras abas
-criar back para quando o validador for clicado em uma aba (cnpj), a página de gerador ser aberta na aba do cnpj
-- fazer o gerador consumir apis de geração de credenciais
-- o validador também pode consumir apis
-
+- adequar oq é digitado no input com uma máscara
 -Encontrar apis ou cálculo do dígito para rg, cnh e renavam
+
+  //FAZER RESPOSTA RECEBER AS DUAS FORMAS DE VALIDAÇÃO DE CPF: IF COM CONDIÇÕES QUE VÃO DEFINIR QUAL CAMINHO RESPOSTA VAI SEGUIR -> FAZER ISSO DEPOIS DE COMITAR 

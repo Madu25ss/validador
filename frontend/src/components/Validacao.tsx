@@ -16,18 +16,21 @@ const Validacao = (props: propsValidacao) => {
       iconDiv = <FontAwesomeIcon icon={faCheck} className='text-green-700'/>;
       textDiv = <div className='text-xs text-green-700'>Válido</div>;
     } else if (props.validacao === undefined) {
-      <div>não identificado</div>
+      <div></div>
     } else {
-      iconDiv = <FontAwesomeIcon icon={faXmark} className='text-red-700'/>;
-      textDiv = <div className='text-xs text-red-700'>Inválido</div>;
+      iconDiv = <FontAwesomeIcon icon={faXmark} className='text-red-800'/>;
+      textDiv = <div className='text-xs text-red-800'>Inválido</div>;
     }; 
 
   return (
-    <>
-      <div>{iconDiv}</div>
-      <div>{textDiv}</div>
-    </>
+    <div className='flex flex-col justify-end text-xs w-fit pr-2'>
+      <div className='flex flex-row space-x-1'>
+        <div>{iconDiv}</div>
+        <div>{textDiv}</div>
+      </div>
+    </div>
   )
 }
 
 export default Validacao
+

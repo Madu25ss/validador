@@ -1,14 +1,14 @@
 import React from "react";
-import TesteComponente from "./TesteComponente";
+import TesteComponente from "../components/TabMuiComponent";
 
 const PagPrincipal = () => {
   return (
     <>
-      <div className="flex flex-col bg-stone-100 h-screen px-24 py-8">
-        <h1 className="mt-4 text-3xl font-light text-center text-zinc-600">
+      <div className="flex flex-col bg-stone-200 h-screen px-24 py-8">
+        <h1 className="text-2xl font-light text-left text-zinc-600">
           Validador
         </h1>
-        <main className="mt-4">
+        <main className="mt-2">
           <TesteComponente />
         </main>
       </div>

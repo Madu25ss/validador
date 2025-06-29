@@ -1,5 +1,5 @@
 import React from "react";
-import TesteComponente from './TesteComponente'
+import TesteComponente from "../components/TabMuiComponent";
 
 const PagGerador = () => {
   return (
@@ -8,9 +8,7 @@ const PagGerador = () => {
         <h1 className="mt-4 text-3xl font-light text-center text-zinc-600">
           Gerador
         </h1>
-        <main className="mt-4">
-          
-        </main>
+        <main className="mt-4"></main>
       </div>
     </>
   );
