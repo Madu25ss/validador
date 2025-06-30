@@ -4,6 +4,7 @@ import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Validacao from "./Validacao";
+import Accordion from "./Accordion"
 
 
 
@@ -15,7 +16,8 @@ const ValidadorCpf = () => {
     undefined
   );
 
-  const [identificacaoJson, setIdentificacaoJson] = useState<string>("");
+  const [retornoJson, setRetornoJson] = useState<string>("");
+  const [NaoExibir, SetNaoExibir] = useState<boolean | undefined>(undefined);
 
 
 
@@ -46,6 +48,7 @@ const ValidadorCpf = () => {
         }
 
         const sequenciaCpf = isSequencia(cpf);
+        SetNaoExibir(true);
       
 
         if (sequenciaCpf == true) {
@@ -95,8 +98,22 @@ const ValidadorCpf = () => {
     if (resposta.status == 200) {
       sucesso = dados.sucess;
 
-      setIdentificacaoJson(dados.data.cpf);
+      // const dadosJson = 
+      //   <p>
+      //     `Nome: ${dados.data.nome}` <br />
+      //     `Nascimento: ${dados.data.nascimento}` <br />
+      //     `CPF: ${dados.data.cpf}` <br />
+      //     `Situaçao: ${dados.data.situacao}` <br />
+      //   </p>
+      
 
+
+      // setRetornoJson(dadosJson);
+
+
+
+
+      SetNaoExibir(false);
     }
 
     function validaSucesso(varSucesso: boolean) {
@@ -122,8 +139,8 @@ const ValidadorCpf = () => {
   return (
     <>
       <TextoDesc name="CPF" />
-      <div className="flex flex-row space-x-7 w-full h-auto mb-2">
-        <div className="flex flex-col w-60 h-auto space-y-6 border border-amber-500">
+      <div className="flex flex-row space-x-10 w-full h-auto mb-2">
+        <div className="flex flex-col w-60 h-auto space-y-6">
           <Input
             name={"CPF"}
             value={cpf}
@@ -146,10 +163,8 @@ const ValidadorCpf = () => {
           />
         </div>
 
-        <div className="border border-amber-700 flex flex-col w-60">
-          {/* <Accordion 
-          identificacao={identificacaoJson}
-          /> */}
+        <div className=" flex flex-col w-60 h-fit max-h-35 mt-5">
+          <Accordion disabled={NaoExibir} textInfos={retornoJson}/>
         </div>
       </div>
 
