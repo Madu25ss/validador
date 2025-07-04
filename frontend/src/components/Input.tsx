@@ -45,12 +45,6 @@ const Input = (props: InputProps) => {
             maxLength={props.maxLength}
           />
         </div>
-        {/* só aparecer após clicar no botão */}
-        {/* <div className="flex flex-col justify-end text-xs w-fit pr-2">
-          <div className="flex flex-row space-x-1">
-            <Validacao validacao={props.validacao}/>
-          </div>
-        </div> */}
       </div>
     </div>
   );

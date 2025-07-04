@@ -1,11 +1,10 @@
 import express, { json } from "express";
-import "dotenv";
 import "dotenv/config";
 import cors from "cors";
 import router from "./src/routes/rotasBack";
 
 const app = express();
-const port = process.env.PORT ?? 5000;
+const port = process.env.PORT || 5000;
 
 app.use(express.json());
 express.urlencoded();
@@ -30,6 +29,7 @@ const corsOptions = {
 app.options("/api", cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(router);
+
 
 
 app.listen(port, () => {

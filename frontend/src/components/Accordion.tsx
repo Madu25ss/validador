@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "./ui/accordion";
-import { ScrollArea, ScrollBar } from "./ui/scroll-area"
+
 
 type propsAcco = {
   disabled?: boolean;
@@ -23,7 +23,7 @@ export default function AccordionDemo(props: propsAcco) {
       >
         <AccordionItem value="item-1">
           <AccordionTrigger className="w-full h-8">Dados</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-2 text-pretty border w-full whitespace-nowrap ">
+          <AccordionContent className="flex flex-col gap-1.5 text-pretty w-full whitespace-nowrap">
             
             {props.textInfos.map((line, index) => (
               <p key={index}>{line}</p>

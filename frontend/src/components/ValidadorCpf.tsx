@@ -6,6 +6,8 @@ import TextoDesc from "./TextoDesc";
 import Validacao from "./Validacao";
 import Accordion from "./Accordion";
 
+const api_url = "http://localhost:3000/validarCPF";
+
 const ValidadorCpf = () => {
   const [cpf, setCpf] = useState<string>("");
   const [dataNascimento, setDataNascimento] = useState<string>("");
@@ -75,7 +77,7 @@ const ValidadorCpf = () => {
       sucesso = validacao();
     }
 
-    const resposta = await fetch("http://localhost:3000/validarCPF", {
+    const resposta = await fetch(api_url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -87,6 +89,8 @@ const ValidadorCpf = () => {
     });
 
     const dados = await resposta.json();
+
+    
 
     if (resposta.status == 200) {
       sucesso = dados.sucess;
@@ -120,7 +124,7 @@ const ValidadorCpf = () => {
   return (
     <>
       <TextoDesc name="CPF" />
-      <div className="flex flex-row space-x-10 w-full mb-4 ">
+      <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start">
           <Input
             name={"CPF"}
@@ -145,10 +149,7 @@ const ValidadorCpf = () => {
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5">
-          <Accordion
-            disabled={NaoExibir}
-            textInfos={retornoJson}
-          />
+          <Accordion disabled={NaoExibir} textInfos={retornoJson} />
         </div>
       </div>
 
