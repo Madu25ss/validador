@@ -23,7 +23,7 @@ const Validacao = (props: propsValidacao) => {
     }; 
 
   return (
-    <div className='flex flex-col justify-end text-xs w-fit pr-2'>
+    <div className='flex flex-col text-xs w-fit pr-2'>
       <div className='flex flex-row space-x-1'>
         <div>{iconDiv}</div>
         <div>{textDiv}</div>

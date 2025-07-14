@@ -1,4 +1,4 @@
-// hooks/useValidaCpf.ts
+
 import { useMutation } from "@tanstack/react-query";
 const api_url = "http://localhost:3000/validarCPF";
 

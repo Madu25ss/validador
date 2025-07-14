@@ -27,18 +27,6 @@ dist-ssr
 PROBLEMAS E MELHORIAAAAS
 
 **Prioridade: 
+- renavam: validar pelo cálculo de dígito verificador;
 
-- aplicar hooks; feito
-- requisição com tanstack; feito
-
-**Melhorias necessárias: 
-
-- primeiro envio sempre resulta em "Inválido"; feito
-- colocar o componente de validação dentro do input, pq aí quando o componente de dados abrir ele não vai descer junto;
--Aplicar estado de carregamento entre o carregamento da requisição da api até o resultado
-
-**A ser feito: 
-
-- CNPJ;
-- cnh;
-- renavam;
+!!Gerador

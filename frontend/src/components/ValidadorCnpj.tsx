@@ -3,75 +3,95 @@ import Botao from "./Botao";
 import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
+import Validacao from "./Validacao";
+import Accordion from "./Accordion";
+import { useValidadorStore } from "../store/store.Cnpj";
+import { useValidaCnpj } from "../hooks/useApiCNPJ";
 
 const ValidadorCnpj = () => {
-  const [cnpj, setCnpj] = useState<string>("");
-  const [resultado, setResultado] = useState<boolean | undefined>(undefined);
+  const {
+    cnpj,
+    setCnpj,
+    resultado,
+    setResultado,
+    setSucesso,
+    validaInput,
+    setValidaInput,
+    naoExibir,
+    SetNaoExibir,
+    retornoJson,
+    setRetornoJson,
+  } = useValidadorStore();
+
+  const { mutate } = useValidaCnpj();
 
   const validaCnpj = () => {
-    console.log(`cpf original ${cnpj}`);
-    let sucesso;
-
-    // const cpfNumber = Number(cpf);
-    // console.log(typeof cpfNumber);
-
-    //tira os digitos verificadores, faz o cálculo, adiciona no novoCpf e compara (true, false)
-    // const cnpjParcial = cnpj.slice(0, 12);
-    // console.log(cnpjParcial);
-    // const digito1 = criaDigito(cnpjParcial, [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
-    // const digito2 = criaDigito(cnpjParcial + digito1, [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]);
-    // console.log(digito1, digito2);
-
-    // const novoCnpj = cnpjParcial + digito1 + digito2;
-    // console.log(`CNPJ Validado: ${novoCnpj}`);
-    // return novoCnpj === cnpj;
-
-    if (cnpj == null || cnpj == undefined || cnpj == "") {
-      sucesso = false;
+    if (!cnpj) {
+      setValidaInput(false);
+      setResultado(false);
+      SetNaoExibir(true);
     } else {
-      sucesso = true;
+      setValidaInput(true);
+      mutate(
+        { cnpj: cnpj },
+        {
+          onSuccess: (dados) => {
+            const geraJson = [
+              `Razão Social: ${dados.data.razaoSocial} \n`,
+              `Nome Fantasia: ${dados.data.nomeFantasia} \n`,
+              `Natureza Jurídica: ${dados.data.naturezaJuridica} \n`,
+              `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
+            ];
+
+            setRetornoJson(geraJson);
+            SetNaoExibir(false);
+            setResultado(true);
+            setSucesso(true);
+          },
+          onError: () => {
+            SetNaoExibir(true);
+            setResultado(false);
+            setSucesso(false);
+          },
+        }
+      );
     }
-
-    function validaSucesso(varSucesso: boolean) {
-      if ((varSucesso = true)) {
-        varSucesso;
-      } else {
-        varSucesso = false;
-      }
-      return varSucesso;
-    }
-
-    // function criaDigito(cnpjParcial: any, pesos: number[]) {
-    //   const cnpjArray = Array.from(cnpjParcial).map(Number);
-
-    //   let total = cnpjArray.reduce((ac: number, num, i) => {
-    //     return ac + num * pesos[i];
-    //   }, 0);
-
-    //   const resto = total % 11;
-    //   const digito = resto < 2 ? 0 : 11 - resto;
-    //   return String(digito);
-    // }
-
-    setResultado(validaSucesso(sucesso));
-
-    // console.log(`CNPJ `, resultado == true ? `Válido` : `Inválido`);
   };
-
+  // razaoSocial: string;
+  //   nomeFantasia: string;
+  //   naturezaJuridica: string;
+  //   DescricaoSituacaoCadastral: string;
   return (
     <>
       <TextoDesc name="CNPJ" />
-      <Input
-        name={"CNPJ"}
-        value={cnpj}
-        onChange={(text: string) => setCnpj(text)}
-        maxLength={14}
-        placeholder="Digite o CNPJ"
-        widthValue={25}
-        validacao={resultado}
-        obrigatorio={true}
-      />
-      <Botao onClick={validaCnpj} />
+      <div className="flex flex-row space-x-10 w-full mb-1 ">
+        <div className="flex flex-col w-60 h-auto justify-items-start">
+          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
+            <Input
+              name={"CNPJ"}
+              value={cnpj}
+              onChange={(text: string) => setCnpj(text)}
+              maxLength={14} //sem máscara
+              placeholder="Digite o CNPJ"
+              widthValue={100}
+              validacao={resultado}
+              obrigatorio={true}
+              inputVazio={validaInput}
+            />
+          </div>
+          <div>
+            <Validacao validacao={resultado} />
+          </div>
+
+          <div>
+            <Botao onClick={validaCnpj} />
+          </div>
+        </div>
+
+        <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
+          <Accordion disabled={naoExibir} textInfos={retornoJson} />
+        </div>
+      </div>
       <TextoLink name={"CNPJ"} path={"/PagGerador"} />
     </>
   );

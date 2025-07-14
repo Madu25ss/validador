@@ -3,14 +3,14 @@ import 'dotenv';
 import 'dotenv/config';
 import { response } from "express";
 
-const apikey = process.env.APIKEY;
+const apikeyCpf = process.env.APIKEYCPF;
 
 async function validarCPF(cpf: string, nascimento?: string ) {
   const url = 'https://api.cpfhub.io/api/cpf';
 
   const headers = {
     'Content-Type': 'application/json',
-    'x-api-key': apikey,
+    'x-api-key': apikeyCpf,
   };
 
   const body = {

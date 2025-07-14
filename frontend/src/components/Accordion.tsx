@@ -19,11 +19,11 @@ export default function AccordionDemo(props: propsAcco) {
       <Accordion
         type="single"
         collapsible
-        className="text-sm text-zinc-600 bg-slate-100 rounded border border-neutral-400 w-full "
+        className="text-sm text-zinc-600 bg-slate-100 rounded border border-neutral-400 w-full"
       >
         <AccordionItem value="item-1">
-          <AccordionTrigger className="w-full h-8">Dados</AccordionTrigger>
-          <AccordionContent className="flex flex-col gap-1.5 text-pretty w-full whitespace-nowrap">
+          <AccordionTrigger className="h-8 w-full">Dados</AccordionTrigger>
+          <AccordionContent className="flex flex-col gap-1.5 text-pretty">
             
             {props.textInfos.map((line, index) => (
               <p key={index}>{line}</p>
