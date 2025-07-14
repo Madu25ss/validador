@@ -1,5 +1,5 @@
 import React from "react";
-import TesteComponente from "../components/TabMuiComponent";
+import TabMuiComponent from '../components/TabMuiComponent'
 
 const PagPrincipal = () => {
   return (
@@ -9,7 +9,7 @@ const PagPrincipal = () => {
           Validador
         </h1>
         <main className="mt-2">
-          <TesteComponente />
+          <TabMuiComponent />
         </main>
       </div>
     </>

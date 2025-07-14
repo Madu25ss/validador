@@ -14,8 +14,8 @@ type InputProps = {
 const Input = (props: InputProps) => {
   let validaCor;
 
-  if (props.obrigatorio == true) {
-    if (props.inputVazio == false) {
+  if (props.obrigatorio === true) {
+    if (props.inputVazio === false) {
       validaCor = `border-red-800`;
     }
   } else {

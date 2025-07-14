@@ -1,36 +1,36 @@
-
-import { useMutation } from "../../node_modules/@tanstack/react-query";
-
+// hooks/useValidaCpf.ts
+import { useMutation } from "@tanstack/react-query";
 const api_url = "http://localhost:3000/validarCPF";
 
-type DadosEnviados = {
+type DadosEntrada = {
   cpf: string;
-  dataNascimento: string;
-}
-
-const postData = async ({cpf, dataNascimento}: DadosEnviados): Promise<any> => {
-  const resposta = await fetch(api_url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      cpf: cpf,
-      nascimento: dataNascimento,
-    }),
-  });
-
-  const dados = await resposta.json();
-  return dados;
+  nascimento: string;
 };
 
-export function useApiCpf() {
-  const mutation = useMutation({
-    mutationFn: postData,
-    onSuccess: (data) => {
-      console.log(`post pelo tanstack funcionando, ${data}`)
+type DadosResposta = {
+  success: boolean;
+  data: {
+    nome: string;
+    nascimento: string;
+    cpf: string;
+    situacao: string;
+  };
+};
+
+export const useValidaCpf = () => {
+  return useMutation<DadosResposta, Error, DadosEntrada>({
+    mutationFn: async ({ cpf, nascimento }) => {
+      const resposta = await fetch(api_url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          cpf: cpf,
+          nascimento: nascimento,
+        }),
+      });
+      return resposta.json();
     },
   });
-
-  return mutation;
-}
+};

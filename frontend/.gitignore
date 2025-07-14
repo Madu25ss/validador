@@ -24,9 +24,21 @@ dist-ssr
 *.sw?
 
 
-Todo: 
+PROBLEMAS E MELHORIAAAAS
 
-- adequar oq é digitado no input com uma máscara
--Encontrar apis ou cálculo do dígito para rg, cnh e renavam
+**Prioridade: 
 
-  //FAZER RESPOSTA RECEBER AS DUAS FORMAS DE VALIDAÇÃO DE CPF: IF COM CONDIÇÕES QUE VÃO DEFINIR QUAL CAMINHO RESPOSTA VAI SEGUIR -> FAZER ISSO DEPOIS DE COMITAR 
+- aplicar hooks; feito
+- requisição com tanstack; feito
+
+**Melhorias necessárias: 
+
+- primeiro envio sempre resulta em "Inválido"; feito
+- colocar o componente de validação dentro do input, pq aí quando o componente de dados abrir ele não vai descer junto;
+-Aplicar estado de carregamento entre o carregamento da requisição da api até o resultado
+
+**A ser feito: 
+
+- CNPJ;
+- cnh;
+- renavam;
