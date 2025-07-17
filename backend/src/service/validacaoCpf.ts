@@ -1,16 +1,17 @@
-import axios from "axios"
-import 'dotenv';
-import 'dotenv/config';
+import axios from "axios";
+import "dotenv";
+import "dotenv/config";
 import { response } from "express";
 
 const apikeyCpf = process.env.APIKEYCPF;
+const apiKeyTools = process.env.APIKEYBYTOOLS;
 
-async function validarCPF(cpf: string, nascimento?: string ) {
-  const url = 'https://api.cpfhub.io/api/cpf';
+export async function validarCPF(cpf: string, nascimento?: string) {
+  const url = "https://api.cpfhub.io/api/cpf";
 
   const headers = {
-    'Content-Type': 'application/json',
-    'x-api-key': apikeyCpf,
+    "Content-Type": "application/json",
+    "x-api-key": apikeyCpf,
   };
 
   const body = {
@@ -22,4 +23,13 @@ async function validarCPF(cpf: string, nascimento?: string ) {
   return response.data;
 }
 
-export default validarCPF;
+export async function geraCpf(points:string, state:string) {
+  const url = "";
+
+  const headers = {
+    "Content-Type": "application/json",
+    "x-api-key": apiKeyTools,
+  };
+
+  const response = await axios.get(url)
+}

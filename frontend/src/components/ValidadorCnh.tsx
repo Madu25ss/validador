@@ -47,7 +47,7 @@ const ValidadorCnh = () => {
  
   return (
     <>
-      <TextoDesc name="CNH" />
+      <TextoDesc text={`Digite o CNH e clique em "Enviar" para verificar se ele é válido ou falso.`}/>
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
@@ -68,8 +68,8 @@ const ValidadorCnh = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCnh} />
-            <TextoLink name={"CNH"} path={"/PagGerador"} />
+            <Botao onClick={validaCnh} name={`Enviar`}/>
+            <TextoLink name={"Gerar CNH"} path={"/PagGerador"} />
           </div>
         </div>
       </div>

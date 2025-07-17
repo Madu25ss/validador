@@ -13,7 +13,8 @@ const TextoLink = (props: TextoProps) => {
       <div className="w-full mt-8">
         <div>
           <h3 className="text-base text-zinc-600">
-            Ou <Link className="cursor-pointer text-teal-700 hover:underline" to={"/PagGerador"}> {`Gerar ${props.name}`}</Link>
+            Ou <Link className="cursor-pointer text-teal-700 hover:underline" to={props.path}> 
+            {`${props.name}`}</Link>
           </h3>
         </div>
       </div>

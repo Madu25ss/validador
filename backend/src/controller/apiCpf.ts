@@ -1,6 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import validarCPF from "../service/validacaoCpf"
+import {validarCPF, geraCpf} from "../service/validacaoCpf";
 
 
 export const validacaoCPF = async (req: Request, res: Response, _nxt: NextFunction) => {
@@ -31,3 +31,7 @@ try {
 }
 
 };
+
+export const geracaoCPF = async (req: Request, res: Response, _nxt: NextFunction) => {
+  
+}

@@ -1,14 +1,16 @@
 import React from "react";
-import TesteComponente from "../components/TabMuiComponent";
+import TabMuiComponentGerar from "../components/TabMuiComponentGerar"
 
 const PagGerador = () => {
-  return (
+return (
     <>
-      <div className="flex flex-col bg-stone-100 h-screen px-24 py-8">
-        <h1 className="mt-4 text-3xl font-light text-center text-zinc-600">
+      <div className="flex flex-col bg-stone-200 h-screen px-24 py-8">
+        <h1 className="text-2xl font-light text-left text-zinc-600">
           Gerador
         </h1>
-        <main className="mt-4"></main>
+        <main className="mt-2">
+          <TabMuiComponentGerar />
+        </main>
       </div>
     </>
   );

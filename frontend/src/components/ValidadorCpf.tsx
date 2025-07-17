@@ -70,7 +70,7 @@ const ValidadorCpf = () => {
   };
   return (
     <>
-      <TextoDesc name="CPF" />
+      <TextoDesc text={`Digite o CPF e clique em "Enviar" para verificar se ele é válido ou falso.`} />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
@@ -101,7 +101,7 @@ const ValidadorCpf = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCpf} />
+            <Botao onClick={validaCpf} name={`Enviar`}/>
           </div>
         </div>
 
@@ -109,7 +109,7 @@ const ValidadorCpf = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"CPF"} path={"/PagGerador"} />
+      <TextoLink name={"Gerar CPF"} path={"/PagGerador"} />
     </>
   );
 };

@@ -63,7 +63,7 @@ const ValidadorCnpj = () => {
   //   DescricaoSituacaoCadastral: string;
   return (
     <>
-      <TextoDesc name="CNPJ" />
+      <TextoDesc text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é válido ou falso.`} />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
@@ -84,7 +84,7 @@ const ValidadorCnpj = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCnpj} />
+            <Botao onClick={validaCnpj} name={`Enviar`}/>
           </div>
         </div>
 
@@ -92,7 +92,7 @@ const ValidadorCnpj = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"CNPJ"} path={"/PagGerador"} />
+      <TextoLink name={"Gerar CNPJ"} path={"/PagGerador"} />
     </>
   );
 };

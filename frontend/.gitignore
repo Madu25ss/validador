@@ -28,5 +28,8 @@ PROBLEMAS E MELHORIAAAAS
 
 **Prioridade: 
 - renavam: validar pelo cálculo de dígito verificador;
+!!Gerador:
+- Refatoração: pagGerador e pagValidador passam props com as tabs para o TabMuiComponent -> ver como passar componentes por props;
+- Redirecionamento: no validador, clicando em "gerar xx", encaminhar para a página correta referente ao tab que está sendo clicado.
 
-!!Gerador
+-voltar a configurar o back da geração de cpf

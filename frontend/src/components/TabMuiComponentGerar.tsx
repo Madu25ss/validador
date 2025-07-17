@@ -2,9 +2,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Box } from "@mui/material";
 import React from "react";
-import ValidadorCpf from "./ValidadorCpf";
-import ValidadorCnpj from "./ValidadorCnpj";
-import ValidadorCnh from "./ValidadorCnh";
+import GeradorCpf from "./GeradorCPF";
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -86,16 +85,16 @@ export default function BasicTabs() {
       </Box>
 
       <CustomTabPanel value={value} index={0}>
-        <ValidadorCpf />
+        <GeradorCpf />
         
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
-        <ValidadorCnpj />
+      
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-        <ValidadorCnh />
+       
       </CustomTabPanel>
     </Box>
   );
