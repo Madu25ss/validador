@@ -11,7 +11,6 @@ async function validarCNPJ(cnpj: string) {
     const response = await axios.get(url);
     return response.data;
   } catch (error: any) {
-    console.error("Erro ao consultar CNPJ:", error.response?.data || error.message);
     throw new Error("Erro na validação do CNPJ");
   }
 }

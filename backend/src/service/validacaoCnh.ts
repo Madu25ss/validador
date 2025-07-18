@@ -16,10 +16,6 @@ async function validarCNH(number: string) {
     const response = await axios.get(url,{params: {number}, headers});
     return response.data;
   } catch (error: any) {
-    console.error(
-      "Erro ao consultar CNH:",
-      error.response?.data || error.message
-    );
     throw new Error("Erro na validação do CNH");
   }
 }

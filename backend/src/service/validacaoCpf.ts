@@ -24,12 +24,16 @@ export async function validarCPF(cpf: string, nascimento?: string) {
 }
 
 export async function geraCpf(points:string, state:string) {
-  const url = "";
+  const url = "https://api.bytools.tech/api/v1/public/geradores/cpf";
 
-  const headers = {
-    "Content-Type": "application/json",
+const headers = {
     "x-api-key": apiKeyTools,
   };
 
-  const response = await axios.get(url)
+  try {
+    const response = await axios.get(url,{params: {points, state}, headers});
+    return response.data;
+  } catch (error: any) {
+    throw new Error("Erro ao gerar CPF");
+  }
 }
