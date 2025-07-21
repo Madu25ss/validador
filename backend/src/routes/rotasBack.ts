@@ -1,14 +1,19 @@
 import { Router } from "express";
 import { geracaoCPF, validacaoCPF } from "../controller/apiCpf";
 import { validacaoCNPJ } from "../controller/apiCnpj";
-import { validacaoCNH } from "../controller/apiCnh";
+import { validacaoCNH, geracaoCNH } from "../controller/apiCnh";
+import { geracaoCNPJ } from "../controller/apiCnpj";
+import { validacaoPlaca } from "../controller/apiPlaca";
 
 const router = Router();
 
 router.use("/validarCPF", validacaoCPF);
 router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
-//resolver 
+//RESOLVER NO OVERLOADS MATCHES THIS CALL
 router.get("/validaCNH", validacaoCNH);
 router.get("/geraCPF", geracaoCPF);
+router.get("/geraCNPJ", geracaoCNPJ);
+router.get("/geraCNH", geracaoCNH);
+router.get("/validaPlaca", validacaoPlaca);
 
 export default router;

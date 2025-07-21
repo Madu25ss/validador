@@ -3,15 +3,15 @@ import Tab from "@mui/material/Tab";
 import { Box } from "@mui/material";
 import React from "react";
 import GeradorCpf from "./GeradorCPF";
-
+import GeradorCnpj from "./GeracaoCNPJ";
+import GeradorCnh from "./GeracaoCnh";
+import GeradorRenavam from "./GeracaoRenavam";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
-
-
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -77,7 +77,7 @@ export default function BasicTabs() {
             {...a11yProps(2)}
           />
           <Tab
-            label="RENAVAM"
+            label="PLACA"
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
             {...a11yProps(3)}
           />
@@ -86,15 +86,17 @@ export default function BasicTabs() {
 
       <CustomTabPanel value={value} index={0}>
         <GeradorCpf />
-        
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
-      
+        <GeradorCnpj />
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-       
+        <GeradorCnh />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <GeradorRenavam />
       </CustomTabPanel>
     </Box>
   );

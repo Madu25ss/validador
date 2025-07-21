@@ -5,7 +5,7 @@ import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Validacao from "./Validacao";
 import Accordion from "./Accordion";
-import { useValidadorStore } from "../store/store.Cnpj";
+import { useValidadorStore } from "../store/storeCnpj";
 import { useValidaCnpj } from "../hooks/useApiCNPJ";
 
 const ValidadorCnpj = () => {
@@ -26,7 +26,7 @@ const ValidadorCnpj = () => {
   const { mutate } = useValidaCnpj();
 
   const validaCnpj = () => {
-    if (!cnpj) {
+    if (!cnpj || (cnpj.length < 14 )) {
       setValidaInput(false);
       setResultado(false);
       SetNaoExibir(true);
@@ -63,7 +63,9 @@ const ValidadorCnpj = () => {
   //   DescricaoSituacaoCadastral: string;
   return (
     <>
-      <TextoDesc text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é válido ou falso.`} />
+      <TextoDesc
+        text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é válido ou falso.`}
+      />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
@@ -84,7 +86,7 @@ const ValidadorCnpj = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCnpj} name={`Enviar`}/>
+            <Botao onClick={validaCnpj} name={`Enviar`} />
           </div>
         </div>
 

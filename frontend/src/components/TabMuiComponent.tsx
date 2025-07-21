@@ -5,7 +5,7 @@ import React from "react";
 import ValidadorCpf from "./ValidadorCpf";
 import ValidadorCnpj from "./ValidadorCnpj";
 import ValidadorCnh from "./ValidadorCnh";
-import ValidadorRenavam from "./ValidadorRenavam";
+import ValidadorPlaca from "./ValidadorPlaca";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -77,7 +77,7 @@ export default function BasicTabs() {
             {...a11yProps(2)}
           />
           <Tab
-            label="RENAVAM"
+            label="PLACA"
             sx={{ "&.Mui-selected": { color: "#00786F" } }}
             {...a11yProps(3)}
           />
@@ -97,7 +97,7 @@ export default function BasicTabs() {
         <ValidadorCnh />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <ValidadorRenavam />
+        <ValidadorPlaca />
       </CustomTabPanel>
     </Box>
   );

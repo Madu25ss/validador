@@ -5,15 +5,16 @@ import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Validacao from "./Validacao";
 import Accordion from "./Accordion";
-import { useValidadorStore } from "../store/store.Cnpj";
-import { useValidaCnpj } from "../hooks/useApiCNPJ";
+import { useValidadorStore } from "../store/storePlaca";
+import { useValidaPlaca } from "../hooks/useApiPlaca";
 
-const ValidadorRenavam = () => {
+const ValidadorPlaca = () => {
   const {
-    cnpj,
-    setCnpj,
+    placa,
+    setPlaca,
     resultado,
     setResultado,
+    sucesso,
     setSucesso,
     validaInput,
     setValidaInput,
@@ -23,30 +24,27 @@ const ValidadorRenavam = () => {
     setRetornoJson,
   } = useValidadorStore();
 
-  const { mutate } = useValidaCnpj();
+  const { mutate } = useValidaPlaca();
 
-  const validaRenav = () => {
-    if (!cnpj) {
+  const validaPlaca = () => {
+    // || placa.length < 7
+    if (!placa) {
       setValidaInput(false);
       setResultado(false);
       SetNaoExibir(true);
     } else {
       setValidaInput(true);
       mutate(
-        { cnpj: cnpj },
+        { plate: placa },
         {
           onSuccess: (dados) => {
-            const geraJson = [
-              `Razão Social: ${dados.data.razaoSocial} \n`,
-              `Nome Fantasia: ${dados.data.nomeFantasia} \n`,
-              `Natureza Jurídica: ${dados.data.naturezaJuridica} \n`,
-              `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
-            ];
+            const geraJson = [`Placa: ${dados.data.value}`];
 
             setRetornoJson(geraJson);
             SetNaoExibir(false);
             setResultado(true);
             setSucesso(true);
+            console.log(dados);
           },
           onError: () => {
             SetNaoExibir(true);
@@ -57,21 +55,20 @@ const ValidadorRenavam = () => {
       );
     }
   };
-  // razaoSocial: string;
-  //   nomeFantasia: string;
-  //   naturezaJuridica: string;
-  //   DescricaoSituacaoCadastral: string;
+
   return (
     <>
-      <TextoDesc text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é válido ou falso.`} />
+      <TextoDesc
+        text={`Digite a Placa do veículo e clique em "Enviar" para verificar se ela é válida ou não.`}
+      />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
             <Input
-              name={"RENAVAM"}
-              value={cnpj}
-              onChange={(text: string) => setCnpj(text)}
-              maxLength={14} //sem máscara
+              name={"Placa"}
+              value={placa}
+              onChange={(text: string) => setPlaca(text)}
+              maxLength={8} //sem máscara
               placeholder="Digite o RENAVAM"
               widthValue={100}
               validacao={resultado}
@@ -84,7 +81,7 @@ const ValidadorRenavam = () => {
           </div>
 
           <div>
-            <Botao onClick={validaRenav} name={`Enviar`}/>
+            <Botao onClick={validaPlaca} name={`Enviar`} />
           </div>
         </div>
 
@@ -92,9 +89,9 @@ const ValidadorRenavam = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"Gerar RENAVAM"} path={"/PagGerador"} />
+      <TextoLink name={"Gerar PLACA"} path={"/PagGerador"} />
     </>
   );
 };
 
-export default ValidadorRenavam;
+export default ValidadorPlaca;

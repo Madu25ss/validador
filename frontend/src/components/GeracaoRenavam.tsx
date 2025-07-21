@@ -4,10 +4,10 @@ import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraCpf";
-import { useGeraCpf } from "../hooks/useApiCriaCpf";
+import { useGeradorStore } from "../store/storeGeraRenavam";
+import { useGeraRenavam } from "../hooks/useCriaRenavam";
 
-const GeradorCpf = () => {
+const GeradorRenavam = () => {
   const {
     setResultado,
     retornoJson,
@@ -17,17 +17,16 @@ const GeradorCpf = () => {
     setSucesso,
   } = useGeradorStore();
 
-  const { mutate } = useGeraCpf();
+  const { mutate } = useGeraRenavam();
 
-  const geraCpf = async () => {
+  const geraRenavam = async () => {
     SetNaoExibir(true);
 
-    mutate(
-      { points: "true", state: "random" },
+    mutate( undefined,
       {
         onSuccess: (dados) => {
-          const geraJson = [`CPF: ${dados.dataCpf}`];
-          console.log(dados.dataCpf);
+          const geraJson = [`CNH: ${dados.dataRenavam}`];
+        
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -43,20 +42,20 @@ const GeradorCpf = () => {
 
   return (
     <>
-      <TextoDesc text={`Clique em "Gerar CPF" para gerar um CPF válido.`} />
+      <TextoDesc text={`Clique em "Gerar Placa" para gerar uma Placa de Veículo válida.`} />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-row w-full h-auto space-x-40">
           <div className="h-fit">
-            <Botao onClick={geraCpf} name={`Gerar CPF`} />
+            <Botao onClick={geraRenavam} name={`Gerar Placa`} />
           </div>
           <div className=" flex flex-col w-full max-w-70 h-full">
             <Accordion disabled={naoExibir} textInfos={retornoJson} />
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CPF"} path={"/"} />
+      <TextoLink name={"Validar Placa"} path={"/"} />
     </>
   );
 };
 
-export default GeradorCpf;
+export default GeradorRenavam;

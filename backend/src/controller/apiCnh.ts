@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
 import validarCNH from "../service/validacaoCnh";
+import geraCnh from "../service/criacaoCnh";
 
 export const validacaoCNH = async (
   req: Request,
@@ -33,3 +34,28 @@ export const validacaoCNH = async (
     res.status(500).json({ error: "Erro ao validar CNH" });
   }
 };
+
+export const geracaoCNH = async (
+  req: Request,
+  res: Response,
+  _nxt: NextFunction
+) => {
+  const { points, allInformation} = req.query;
+
+  try {
+    const resultado = await geraCnh(String(points), String(allInformation));
+    if (res.status(200)) {
+      res.status(200).json({
+        success: true,
+        dataCnh: resultado.data,
+      });
+    } else {
+      return res.status(400).json({
+        success: false
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao gerar CNH"});
+  }
+};
+

@@ -1,0 +1,56 @@
+import express from "express";
+import { Request, Response, NextFunction } from "express";
+import validarPlaca from "../service/validacaoPlaca";
+
+export const validacaoPlaca = async (
+  req: Request,
+  res: Response,
+  _nxt: NextFunction
+) => {
+  const { plate } = req.query;
+
+  if (!plate) {
+    res.status(400).json({ error: "O Campo é Obrigatório" });
+  }
+
+  try {
+    const resultado = await validarPlaca(String(plate));
+
+    if (resultado.data.valid === true) {
+      res.status(200).json({
+        success: true,
+        dataPlaca: resultado.data,
+      });
+    } else {
+      return res.status(400).json({
+        success: false,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao validar Placa" });
+    console.log(error);
+  }
+};
+
+// export const geracaoPlaca = async (
+//   req: Request,
+//   res: Response,
+//   _nxt: NextFunction
+// ) => {
+
+//   try {
+//     const resultado = await geraRenavam();
+//     if (res.status(200)) {
+//       res.status(200).json({
+//         success: true,
+//         dataRenavam: resultado.data,
+//       });
+//     } else {
+//       return res.status(400).json({
+//         success: false
+//       });
+//     }
+//   } catch (error) {
+//     res.status(500).json({ error: "Erro ao gerar RENAVAM"});
+//   }
+// };

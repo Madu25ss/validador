@@ -22,7 +22,7 @@ const ValidadorCnh = () => {
   const { mutate } = useValidaCnh();
 
   const validaCnh = () => {
-    if (!cnh) {
+    if (!cnh || (cnh.length < 11 )) {
       setValidaInput(false);
       setResultado(false);
     } else {
@@ -55,7 +55,7 @@ const ValidadorCnh = () => {
               name={"CNH"}
               value={cnh}
               onChange={(text: string) => setCnh(text)}
-              maxLength={11} //sem máscara
+              maxLength={14} //sem máscara
               placeholder="Digite o CNH"
               widthValue={100}
               validacao={resultado}

@@ -4,10 +4,10 @@ import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraCpf";
-import { useGeraCpf } from "../hooks/useApiCriaCpf";
+import { useGeradorStore } from "../store/useGeraCnh";
+import { useGeraCnh } from "../hooks/useApiCriaCnh";
 
-const GeradorCpf = () => {
+const GeradorCnh = () => {
   const {
     setResultado,
     retornoJson,
@@ -17,17 +17,17 @@ const GeradorCpf = () => {
     setSucesso,
   } = useGeradorStore();
 
-  const { mutate } = useGeraCpf();
+  const { mutate } = useGeraCnh();
 
-  const geraCpf = async () => {
+  const geraCnh = async () => {
     SetNaoExibir(true);
 
     mutate(
-      { points: "true", state: "random" },
+      { points: "true", allInformation: "false"},
       {
         onSuccess: (dados) => {
-          const geraJson = [`CPF: ${dados.dataCpf}`];
-          console.log(dados.dataCpf);
+          const geraJson = [`CNH: ${dados.dataCnh}`];
+        
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -43,20 +43,20 @@ const GeradorCpf = () => {
 
   return (
     <>
-      <TextoDesc text={`Clique em "Gerar CPF" para gerar um CPF válido.`} />
+      <TextoDesc text={`Clique em "Gerar CNH" para gerar um CNH válido.`} />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-row w-full h-auto space-x-40">
           <div className="h-fit">
-            <Botao onClick={geraCpf} name={`Gerar CPF`} />
+            <Botao onClick={geraCnh} name={`Gerar CNH`} />
           </div>
           <div className=" flex flex-col w-full max-w-70 h-full">
             <Accordion disabled={naoExibir} textInfos={retornoJson} />
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CPF"} path={"/"} />
+      <TextoLink name={"Validar CNH"} path={"/"} />
     </>
   );
 };
 
-export default GeradorCpf;
+export default GeradorCnh;

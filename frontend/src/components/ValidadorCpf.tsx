@@ -31,7 +31,7 @@ const ValidadorCpf = () => {
   const validarCpfHelper = useValidacaoInputCpf();
 
   const validaCpf = async () => {
-    if (!cpf) {
+    if (!cpf || (cpf.length < 11 )) {
       setValidaInput(false);
       setResultado(false);
     } else {

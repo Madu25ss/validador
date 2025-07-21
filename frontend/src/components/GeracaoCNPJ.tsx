@@ -4,10 +4,10 @@ import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraCpf";
-import { useGeraCpf } from "../hooks/useApiCriaCpf";
+import { useGeradorStore } from "../store/storeGeraCnpj";
+import { useGeraCnpj } from "../hooks/useApiCriaCnpj";
 
-const GeradorCpf = () => {
+const GeradorCnpj = () => {
   const {
     setResultado,
     retornoJson,
@@ -17,17 +17,17 @@ const GeradorCpf = () => {
     setSucesso,
   } = useGeradorStore();
 
-  const { mutate } = useGeraCpf();
+  const { mutate } = useGeraCnpj();
 
-  const geraCpf = async () => {
+  const geraCnpj = async () => {
     SetNaoExibir(true);
 
     mutate(
-      { points: "true", state: "random" },
+      { points: "true"},
       {
         onSuccess: (dados) => {
-          const geraJson = [`CPF: ${dados.dataCpf}`];
-          console.log(dados.dataCpf);
+          const geraJson = [`CNPJ: ${dados.dataCnpj}`];
+          console.log(dados.dataCnpj);
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -43,20 +43,20 @@ const GeradorCpf = () => {
 
   return (
     <>
-      <TextoDesc text={`Clique em "Gerar CPF" para gerar um CPF válido.`} />
+      <TextoDesc text={`Clique em "Gerar CNPJ" para gerar um CNPJ válido.`} />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-row w-full h-auto space-x-40">
           <div className="h-fit">
-            <Botao onClick={geraCpf} name={`Gerar CPF`} />
+            <Botao onClick={geraCnpj} name={`Gerar CNPJ`} />
           </div>
           <div className=" flex flex-col w-full max-w-70 h-full">
             <Accordion disabled={naoExibir} textInfos={retornoJson} />
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CPF"} path={"/"} />
+      <TextoLink name={"Validar CNPJ"} path={"/"} />
     </>
   );
 };
 
-export default GeradorCpf;
+export default GeradorCnpj;

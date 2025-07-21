@@ -15,8 +15,6 @@ async function geraCpf(points: string, state: string) {
     const response = await axios.get(url, { params: {points, state}, headers},);
     return response.data;
   } catch (error: any) {
-    console.log("Erro completo:", error.response?.data || error.message);
-    console.log("API Key:", apiKeyToolsCpf);
     throw new Error("Erro ao gerar CPF");
   }
 }

@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
 import validarCNPJ from "../service/validacaoCnpj";
+import geraCnpj from "../service/criacaoCnpj";
 
 export const validacaoCNPJ = async (
   req: Request,
@@ -31,3 +32,28 @@ export const validacaoCNPJ = async (
     res.status(500).json({ error: "Erro ao validar CNPJ" });
   }
 };
+
+export const geracaoCNPJ = async (
+  req: Request,
+  res: Response,
+  _nxt: NextFunction
+) => {
+  const { points} = req.query;
+
+  try {
+    const resultado = await geraCnpj(String(points));
+    if (res.status(200)) {
+      res.status(200).json({
+        success: true,
+        dataCnpj: resultado.data,
+      });
+    } else {
+      return res.status(400).json({
+        success: false
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao gerar CNPJ"});
+  }
+};
+
