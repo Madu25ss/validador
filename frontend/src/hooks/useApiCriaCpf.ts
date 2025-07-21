@@ -1,56 +1,36 @@
-
-import { useQuery } from "@tanstack/react-query";
-const api_url = "http://localhost:3000/validarCPF";
+import { useMutation } from "@tanstack/react-query";
 
 type DadosEntrada = {
-  cpf: string;
-  nascimento: string;
+  points: string;
+  state: string;
 };
 
 type DadosResposta = {
-  success: boolean;
-  data: {
-    nome: string;
-    nascimento: string;
-    cpf: string;
-    situacao: string;
-  };
+  dataCpf: string;
 };
 
-// export const useValidaCpf = () => {
+// const dadosApi = async ({ points, state }: DadosEntrada): Promise<DadosResposta> => {
+//   const response = await fetch(
+//     `https://api.bytools.tech/api/v1/public/geradores/cpf?points=${points}&state=${state}`
+//   );
+//   if (!response.ok) throw new Error("erro..");
+//   return response.json();
+// };
+
+// export const useGeraCpf = () => {
 //   return useMutation<DadosResposta, Error, DadosEntrada>({
-//     mutationFn: async ({ cpf, nascimento }) => {
-//       const resposta = await fetch(api_url, {
-//         method: "GET",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({
-//           cpf: cpf,
-//           nascimento: nascimento,
-//         }),
-//       });
-//       return resposta.json();
-//     },
+//     mutationFn: dadosApi,
 //   });
 // };
 
-/////user esse para get
-// import { useQuery } from "@tanstack/react-query";
-// import axios from "axios";
-
-// const API_CALCADOS = '/getCalcados.php';
-
-// const fetchCalcados = async () => {
-//  const response = await axios.get(API_CALCADOS);
-//  return response.data;
-// }
-
-// export function useCalcadoData(){
-//  const query = useQuery({
-//  queryFn: fetchCalcados,
-//  queryKey: ['calcados-data']
-//  });
-
-//  return query;
-// }
+export const useGeraCpf = () => {
+  return useMutation<DadosResposta, Error, DadosEntrada>({
+    mutationFn: async ({ points, state }) => {
+      const resposta = await fetch(
+        `http://localhost:3000/geraCPF?points=${points}&state=${state}`
+      );
+      if (!resposta.ok) throw new Error("Erro na criação do CPF");
+      return resposta.json();
+    },
+  });
+};

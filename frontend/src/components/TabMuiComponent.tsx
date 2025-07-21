@@ -5,14 +5,13 @@ import React from "react";
 import ValidadorCpf from "./ValidadorCpf";
 import ValidadorCnpj from "./ValidadorCnpj";
 import ValidadorCnh from "./ValidadorCnh";
+import ValidadorRenavam from "./ValidadorRenavam";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
-
-
 
 function CustomTabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -96,6 +95,9 @@ export default function BasicTabs() {
 
       <CustomTabPanel value={value} index={2}>
         <ValidadorCnh />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <ValidadorRenavam />
       </CustomTabPanel>
     </Box>
   );

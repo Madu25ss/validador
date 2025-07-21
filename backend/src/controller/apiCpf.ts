@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import { validarCPF, geraCpf } from "../service/validacaoCpf";
+import validarCPF from "../service/validacaoCpf";
+import geraCpf from "../service/criacaoCpf";
 
 export const validacaoCPF = async (
   req: Request,

@@ -3,69 +3,44 @@ import Botao from "./Botao";
 import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
-import Validacao from "./Validacao";
 import Accordion from "./Accordion";
 import { useGeradorStore } from "../store/storeGeraCpf";
+import { useGeraCpf } from "../hooks/useApiCriaCpf";
 
 const GeradorCpf = () => {
   const {
-    resultado,
     setResultado,
     retornoJson,
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
-    sucesso,
     setSucesso,
   } = useGeradorStore();
 
-  // const { mutate } = useValidaCpf();
-  // const validarCpfHelper = useValidacaoInputCpf();
+  const { mutate } = useGeraCpf();
 
   const geraCpf = async () => {
-    console.log("clicando");
-    SetNaoExibir(false);
+    SetNaoExibir(true);
 
-    const passaTexto = [`teste`];
-    setRetornoJson(passaTexto);
+    mutate(
+      { points: "false", state: "random" },
+      {
+        onSuccess: (dados) => {
+          const geraJson = [`CPF: ${dados.dataCpf}`];
+          console.log(dados.dataCpf);
+
+          setRetornoJson(geraJson);
+          SetNaoExibir(false);
+          setResultado(true);
+          setSucesso(true);
+        },
+        onError: () => {
+          SetNaoExibir(true);
+        },
+      }
+    );
   };
-  //   if (!cpf) {
-  //     setValidaInput(false);
-  //     setResultado(false);
-  //   } else {
-  //     setValidaInput(true);
-  //   }
 
-  //   if (!dataNascimento) {
-  //     const resultadoViaHelper = validarCpfHelper(cpf);
-  //     setResultado(resultadoViaHelper);
-  //     SetNaoExibir(true);
-  //   } else {
-  //     mutate(
-  //       { cpf, nascimento: dataNascimento },
-  //       {
-  //         onSuccess: (dados) => {
-  //           const geraJson = [
-  //             `Nome: ${dados.data.nome} \n`,
-  //             `Nascimento: ${dados.data.nascimento} \n`,
-  //             `CPF: ${dados.data.cpf} \n`,
-  //             `Situação: ${dados.data.situacao} \n`,
-  //           ];
-
-  //           setRetornoJson(geraJson);
-  //           SetNaoExibir(false);
-  //           setResultado(true);
-  //           setSucesso(true);
-  //         },
-  //         onError: () => {
-  //           SetNaoExibir(true);
-  //           setResultado(false);
-  //           setSucesso(false);
-  //         },
-  //       }
-  //     );
-  //   }
-  // };
   return (
     <>
       <TextoDesc text={`Clique em "Gerar CPF" para gerar um CPF válido.`} />

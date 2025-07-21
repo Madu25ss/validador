@@ -13,7 +13,7 @@ async function validarCNH(number: string) {
   };
 
   try {
-    const response = await axios.get(url,{params: {number}, headers});
+    const response = await axios.get(url, { params: { number }, headers });
     return response.data;
   } catch (error: any) {
     throw new Error("Erro na validação do CNH");

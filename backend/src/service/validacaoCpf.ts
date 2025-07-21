@@ -4,9 +4,8 @@ import "dotenv/config";
 import { response } from "express";
 
 const apikeyCpf = process.env.APIKEYCPF;
-const apiKeyTools = process.env.APIKEYBYTOOLS;
 
-export async function validarCPF(cpf: string, nascimento?: string) {
+async function validarCPF(cpf: string, nascimento?: string) {
   const url = "https://api.cpfhub.io/api/cpf";
 
   const headers = {
@@ -23,17 +22,4 @@ export async function validarCPF(cpf: string, nascimento?: string) {
   return response.data;
 }
 
-export async function geraCpf(points:string, state:string) {
-  const url = "https://api.bytools.tech/api/v1/public/geradores/cpf";
-
-const headers = {
-    "x-api-key": apiKeyTools,
-  };
-
-  try {
-    const response = await axios.get(url,{params: {points, state}, headers});
-    return response.data;
-  } catch (error: any) {
-    throw new Error("Erro ao gerar CPF");
-  }
-}
+export default validarCPF;
