@@ -1,6 +1,7 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
 import validarPlaca from "../service/validacaoPlaca";
+import geraPlaca from "../service/criacaoPlaca";
 
 export const validacaoPlaca = async (
   req: Request,
@@ -19,7 +20,7 @@ export const validacaoPlaca = async (
     if (resultado.data.valid === true) {
       res.status(200).json({
         success: true,
-        dataPlaca: resultado.data,
+        data: resultado.data,
       });
     } else {
       return res.status(400).json({
@@ -32,25 +33,31 @@ export const validacaoPlaca = async (
   }
 };
 
-// export const geracaoPlaca = async (
-//   req: Request,
-//   res: Response,
-//   _nxt: NextFunction
-// ) => {
+export const geracaoPlaca = async (
+  req: Request,
+  res: Response,
+  _nxt: NextFunction
+) => {
 
-//   try {
-//     const resultado = await geraRenavam();
-//     if (res.status(200)) {
-//       res.status(200).json({
-//         success: true,
-//         dataRenavam: resultado.data,
-//       });
-//     } else {
-//       return res.status(400).json({
-//         success: false
-//       });
-//     }
-//   } catch (error) {
-//     res.status(500).json({ error: "Erro ao gerar RENAVAM"});
-//   }
-// };
+  const {points, state, make, year} = req.query;
+
+  try {
+    const resultado = await geraPlaca(
+      points === "true",
+      String(state),
+      String(make),
+      String(year),
+    )
+    if (res.status(200)) {
+      res.status(200).json({
+        data: resultado.data,
+      });
+    } else {
+      return res.status(400).json({
+        success: false
+      });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao gerar Placa"});
+  }
+};

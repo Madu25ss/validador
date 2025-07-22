@@ -4,10 +4,10 @@ import Input from "./Input";
 import TextoLink from "./Texto";
 import TextoDesc from "./TextoDesc";
 import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraRenavam";
-import { useGeraRenavam } from "../hooks/useCriaRenavam";
+import { useGeraPlaca } from "../hooks/useCriaPlaca";
+import { useGeradorStore } from "../store/storeGeraPlaca";
 
-const GeradorRenavam = () => {
+const GeradorPlaca = () => {
   const {
     setResultado,
     retornoJson,
@@ -17,16 +17,16 @@ const GeradorRenavam = () => {
     setSucesso,
   } = useGeradorStore();
 
-  const { mutate } = useGeraRenavam();
+  const { mutate } = useGeraPlaca();
 
-  const geraRenavam = async () => {
+  const geraPlaca = async () => {
     SetNaoExibir(true);
 
-    mutate( undefined,
+    mutate(
+      { points: true, state: "random", make: "random", year: "random" },
       {
         onSuccess: (dados) => {
-          const geraJson = [`CNH: ${dados.dataRenavam}`];
-        
+          const geraJson = [`Placa: ${dados.data.plate}`];
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -35,6 +35,8 @@ const GeradorRenavam = () => {
         },
         onError: () => {
           SetNaoExibir(true);
+          setResultado(true);
+          setSucesso(true);
         },
       }
     );
@@ -42,11 +44,13 @@ const GeradorRenavam = () => {
 
   return (
     <>
-      <TextoDesc text={`Clique em "Gerar Placa" para gerar uma Placa de Veículo válida.`} />
+      <TextoDesc
+        text={`Clique em "Gerar Placa" para gerar uma Placa válida.`}
+      />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-row w-full h-auto space-x-40">
           <div className="h-fit">
-            <Botao onClick={geraRenavam} name={`Gerar Placa`} />
+            <Botao onClick={geraPlaca} name={`Gerar Placa`} />
           </div>
           <div className=" flex flex-col w-full max-w-70 h-full">
             <Accordion disabled={naoExibir} textInfos={retornoJson} />
@@ -58,4 +62,4 @@ const GeradorRenavam = () => {
   );
 };
 
-export default GeradorRenavam;
+export default GeradorPlaca;

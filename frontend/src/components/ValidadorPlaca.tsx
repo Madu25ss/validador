@@ -27,24 +27,24 @@ const ValidadorPlaca = () => {
   const { mutate } = useValidaPlaca();
 
   const validaPlaca = () => {
+    console.log(placa);
     // || placa.length < 7
     if (!placa) {
       setValidaInput(false);
       setResultado(false);
       SetNaoExibir(true);
+      setSucesso(false);
     } else {
       setValidaInput(true);
       mutate(
-        { plate: placa },
+        { placa },
         {
           onSuccess: (dados) => {
             const geraJson = [`Placa: ${dados.data.value}`];
-
             setRetornoJson(geraJson);
             SetNaoExibir(false);
             setResultado(true);
             setSucesso(true);
-            console.log(dados);
           },
           onError: () => {
             SetNaoExibir(true);
@@ -69,7 +69,7 @@ const ValidadorPlaca = () => {
               value={placa}
               onChange={(text: string) => setPlaca(text)}
               maxLength={8} //sem máscara
-              placeholder="Digite o RENAVAM"
+              placeholder="Digite a Placa"
               widthValue={100}
               validacao={resultado}
               obrigatorio={true}

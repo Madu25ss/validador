@@ -5,7 +5,7 @@ import React from "react";
 import GeradorCpf from "./GeradorCPF";
 import GeradorCnpj from "./GeracaoCNPJ";
 import GeradorCnh from "./GeracaoCnh";
-import GeradorRenavam from "./GeracaoRenavam";
+import GeradorPlaca from "./GeracaoPlaca";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -96,7 +96,7 @@ export default function BasicTabs() {
         <GeradorCnh />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <GeradorRenavam />
+        <GeradorPlaca />
       </CustomTabPanel>
     </Box>
   );

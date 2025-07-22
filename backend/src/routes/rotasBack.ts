@@ -3,7 +3,7 @@ import { geracaoCPF, validacaoCPF } from "../controller/apiCpf";
 import { validacaoCNPJ } from "../controller/apiCnpj";
 import { validacaoCNH, geracaoCNH } from "../controller/apiCnh";
 import { geracaoCNPJ } from "../controller/apiCnpj";
-import { validacaoPlaca } from "../controller/apiPlaca";
+import { validacaoPlaca, geracaoPlaca } from "../controller/apiPlaca";
 
 const router = Router();
 
@@ -15,5 +15,6 @@ router.get("/geraCPF", geracaoCPF);
 router.get("/geraCNPJ", geracaoCNPJ);
 router.get("/geraCNH", geracaoCNH);
 router.get("/validaPlaca", validacaoPlaca);
+router.get("/geraPlaca", geracaoPlaca);
 
 export default router;
