@@ -26,35 +26,47 @@ const ValidadorCnpj = () => {
   const { mutate } = useValidaCnpj();
 
   const validaCnpj = () => {
-    if (!cnpj || (cnpj.length < 14 )) {
+    // function verificaMask(cnpj: string) {
+    //   return (cnpj = cnpj.replace(/\D/g, ""));
+    // }
+
+    const cnpjSemMask = cnpj.replace(/\D/g, "");
+
+    SetNaoExibir(true);
+    if (!cnpj) {
       setValidaInput(false);
       setResultado(false);
       SetNaoExibir(true);
     } else {
-      setValidaInput(true);
-      mutate(
-        { cnpj: cnpj },
-        {
-          onSuccess: (dados) => {
-            const geraJson = [
-              `Razão Social: ${dados.data.razaoSocial} \n`,
-              `Nome Fantasia: ${dados.data.nomeFantasia} \n`,
-              `Natureza Jurídica: ${dados.data.naturezaJuridica} \n`,
-              `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
-            ];
+      // setCnpj(verificaMask(cnpj));
+      // console.log(`cnpj pós verificaMask ${cnpj}`);
+      {
+        mutate(
+          { cnpjSemMask },
+          {
+            onSuccess: (dados) => {
+              const geraJson = [
+                `Razão Social: ${dados.data.razaoSocial} \n`,
+                `Nome Fantasia: ${dados.data.nomeFantasia} \n`,
+                `Natureza Jurídica: ${dados.data.naturezaJuridica} \n`,
+                `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
+              ];
 
-            setRetornoJson(geraJson);
-            SetNaoExibir(false);
-            setResultado(true);
-            setSucesso(true);
-          },
-          onError: () => {
-            SetNaoExibir(true);
-            setResultado(false);
-            setSucesso(false);
-          },
-        }
-      );
+              console.log(dados);
+              setRetornoJson(geraJson);
+              SetNaoExibir(false);
+              setResultado(true);
+              setSucesso(true);
+            },
+            onError: () => {
+              SetNaoExibir(true);
+              setResultado(false);
+              setSucesso(false);
+            },
+          }
+        );
+      }
+      setValidaInput(true);
     }
   };
   // razaoSocial: string;
@@ -73,7 +85,7 @@ const ValidadorCnpj = () => {
               name={"CNPJ"}
               value={cnpj}
               onChange={(text: string) => setCnpj(text)}
-              maxLength={14} //sem máscara
+              maxLength={18} //sem máscara
               placeholder="Digite o CNPJ"
               widthValue={100}
               validacao={resultado}

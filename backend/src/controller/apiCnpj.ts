@@ -9,6 +9,7 @@ export const validacaoCNPJ = async (
   _nxt: NextFunction
 ) => {
   const { cnpj } = req.params;
+  
 
   if (!cnpj) {
     res.status(400).json({ error: "O Campo CNPJ é Obrigatório" });

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 
 type DadosEntrada = {
-  cnpj: string;
+  cnpjSemMask: string;
 };
 
 // razaoSocial: resultado.data.razao_social,
@@ -21,8 +21,8 @@ type DadosResposta = {
 
 export const useValidaCnpj = () => {
   return useMutation<DadosResposta, Error, DadosEntrada>({
-    mutationFn: async ({ cnpj }) => {
-      const resposta = await fetch(`http://localhost:3000/validaCNPJ/${cnpj}`);
+    mutationFn: async ({ cnpjSemMask }) => {
+      const resposta = await fetch(`http://localhost:3000/validaCNPJ/${cnpjSemMask}`);
       if (!resposta.ok) throw new Error("Erro na validação do CNPJ");
       return resposta.json();
     },
