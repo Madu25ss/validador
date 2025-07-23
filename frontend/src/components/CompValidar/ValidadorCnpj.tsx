@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Validacao from "./Validacao";
-import Accordion from "./Accordion";
-import { useValidadorStore } from "../store/storeCnpj";
-import { useValidaCnpj } from "../hooks/useApiCNPJ";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Validacao from "../Validacao";
+import Accordion from "../Accordion";
+import { useHooksStore } from "../../store/storeHooks";
+import { useValidaCnpj } from "../../hooks/hooksValidacao/useApiCNPJ";
 
 const ValidadorCnpj = () => {
   const {
@@ -21,7 +21,7 @@ const ValidadorCnpj = () => {
     SetNaoExibir,
     retornoJson,
     setRetornoJson,
-  } = useValidadorStore();
+  } = useHooksStore();
 
   const { mutate } = useValidaCnpj();
 
@@ -69,14 +69,17 @@ const ValidadorCnpj = () => {
       setValidaInput(true);
     }
   };
-  // razaoSocial: string;
-  //   nomeFantasia: string;
-  //   naturezaJuridica: string;
-  //   DescricaoSituacaoCadastral: string;
+
+  // const resetHooks = async () => {
+  //   setResultado(undefined);
+  //   SetNaoExibir(undefined);
+  //   setRetornoJson([""]);
+  // };
+
   return (
     <>
       <TextoDesc
-        text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é válido ou falso.`}
+        text={`Digite o CNPJ e clique em "Enviar" para verificar se ele é Válido ou Inválido.`}
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
@@ -106,7 +109,7 @@ const ValidadorCnpj = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"Gerar CNPJ"} path={"/PagGerador"} />
+      <TextoLink name={"Gerar CNPJ"} path={"/PagGerador/1"} />
     </>
   );
 };

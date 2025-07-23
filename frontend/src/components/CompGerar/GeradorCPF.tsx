@@ -1,21 +1,24 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraCpf";
-import { useGeraCpf } from "../hooks/useApiCriaCpf";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Accordion from "../Accordion";
+import { useHooksStore } from "../../store/storeHooks";
+import { useGeraCpf } from "../../hooks/hooksGeracao/useApiCriaCpf";
 
 const GeradorCpf = () => {
   const {
+    setCpf,
+    setNascimento,
     setResultado,
+    setValidaInput,
     retornoJson,
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
     setSucesso,
-  } = useGeradorStore();
+  } = useHooksStore();
 
   const { mutate } = useGeraCpf();
 
@@ -41,6 +44,15 @@ const GeradorCpf = () => {
     );
   };
 
+  const resetHooks = async () => {
+    setResultado(undefined);
+    setCpf("");
+    setNascimento("");
+    setValidaInput(undefined);
+    SetNaoExibir(undefined);
+    setRetornoJson([""]);
+  };
+
   return (
     <>
       <TextoDesc text={`Clique em "Gerar CPF" para gerar um CPF válido.`} />
@@ -54,7 +66,11 @@ const GeradorCpf = () => {
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CPF"} path={"/"} />
+      <TextoLink
+        name={"Validar CPF"}
+        path={"/validador/0"}
+        onClick={resetHooks}
+      />
     </>
   );
 };

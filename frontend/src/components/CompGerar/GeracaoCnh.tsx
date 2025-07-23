@@ -1,21 +1,23 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/useGeraCnh";
-import { useGeraCnh } from "../hooks/useApiCriaCnh";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Accordion from "../Accordion";
+import { useHooksStore } from "../../store/storeHooks";
+import { useGeraCnh } from "../../hooks/hooksGeracao/useApiCriaCnh";
 
 const GeradorCnh = () => {
   const {
+    setCnh,
+    setValidaInput,
     setResultado,
     retornoJson,
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
     setSucesso,
-  } = useGeradorStore();
+  } = useHooksStore();
 
   const { mutate } = useGeraCnh();
 
@@ -23,11 +25,10 @@ const GeradorCnh = () => {
     SetNaoExibir(true);
 
     mutate(
-      { points: "true", allInformation: "false"},
+      { points: "true", allInformation: "false" },
       {
         onSuccess: (dados) => {
           const geraJson = [`CNH: ${dados.dataCnh}`];
-        
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -39,6 +40,14 @@ const GeradorCnh = () => {
         },
       }
     );
+  };
+
+  const resetHooks = () => {
+    setResultado(undefined);
+    setCnh("");
+    setValidaInput(undefined);
+    SetNaoExibir(undefined);
+    setRetornoJson([""]);
   };
 
   return (
@@ -54,7 +63,11 @@ const GeradorCnh = () => {
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CNH"} path={"/"} />
+      <TextoLink
+        name={"Validar CNH"}
+        path={"/validador/2"}
+        onClick={resetHooks}
+      />
     </>
   );
 };

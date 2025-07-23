@@ -1,13 +1,14 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Validacao from "./Validacao";
-import Accordion from "./Accordion";
-import { useValidaCpf } from "../hooks/useApiCpf";
-import { useValidacaoInputCpf } from "../helper/helperValidaCpf";
-import { useValidadorStore } from "../store/storeCpf";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Validacao from "../Validacao";
+import Accordion from "../Accordion";
+import { useValidaCpf } from "../../hooks/hooksValidacao/useApiCpf";
+import { useValidacaoInputCpf } from "../../helper/helperValidaCpf";
+import { useHooksStore } from "../../store/storeHooks";
+import { Link } from "react-router-dom";
 
 const ValidadorCpf = () => {
   const {
@@ -25,13 +26,13 @@ const ValidadorCpf = () => {
     SetNaoExibir,
     sucesso,
     setSucesso,
-  } = useValidadorStore();
+  } = useHooksStore();
 
   const { mutate } = useValidaCpf();
   const validarCpfHelper = useValidacaoInputCpf();
 
   const validaCpf = async () => {
-    if (!cpf || (cpf.length < 11 )) {
+    if (!cpf || cpf.length < 11) {
       setValidaInput(false);
       setResultado(false);
     } else {
@@ -68,9 +69,18 @@ const ValidadorCpf = () => {
       );
     }
   };
+
+  // const resetHooks = async () => {
+  //   setResultado(undefined);
+  //   SetNaoExibir(undefined);
+  //   setRetornoJson([""]);
+  // };
+
   return (
     <>
-      <TextoDesc text={`Digite o CPF e clique em "Enviar" para verificar se ele é válido ou falso.`} />
+      <TextoDesc
+        text={`Digite o CPF e clique em "Enviar" para verificar se ele é Válido ou Inválido.`}
+      />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-7 h-auto justify-items-start mb-1">
@@ -101,7 +111,7 @@ const ValidadorCpf = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCpf} name={`Enviar`}/>
+            <Botao onClick={validaCpf} name={`Enviar`} />
           </div>
         </div>
 
@@ -109,7 +119,8 @@ const ValidadorCpf = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"Gerar CPF"} path={"/PagGerador"} />
+
+      <TextoLink name={"Gerar CPF"} path="/PagGerador/0" />
     </>
   );
 };

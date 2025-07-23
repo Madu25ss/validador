@@ -1,11 +1,11 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Validacao from "./Validacao";
-import { useValidaCnh } from "../hooks/useApiCnh";
-import { useValidadorStore } from "../store/storeCnh";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Validacao from "../Validacao";
+import { useValidaCnh } from "../../hooks/hooksValidacao/useApiCnh";
+import { useHooksStore } from "../../store/storeHooks";
 
 const ValidadorCnh = () => {
   const {
@@ -17,19 +17,20 @@ const ValidadorCnh = () => {
     validaInput,
     setValidaInput,
     SetNaoExibir,
-  } = useValidadorStore();
+    setRetornoJson,
+  } = useHooksStore();
 
   const { mutate } = useValidaCnh();
 
   const validaCnh = () => {
-    if (!cnh || (cnh.length < 11 )) {
+    if (!cnh) {
       setValidaInput(false);
       setResultado(false);
     } else {
       setValidaInput(true);
       mutate(
         { cnh },
-        { 
+        {
           onSuccess: () => {
             SetNaoExibir(false);
             setResultado(true);
@@ -44,10 +45,18 @@ const ValidadorCnh = () => {
       );
     }
   };
- 
+
+  // const resetHooks = async () => {
+  //   setResultado(undefined);
+  //   SetNaoExibir(undefined);
+  //   setRetornoJson([""]);
+  // };
+
   return (
     <>
-      <TextoDesc text={`Digite o CNH e clique em "Enviar" para verificar se ele é válido ou falso.`}/>
+      <TextoDesc
+        text={`Digite o CNH e clique em "Enviar" para verificar se ele é Válido ou Inválido.`}
+      />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
           <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
@@ -68,8 +77,8 @@ const ValidadorCnh = () => {
           </div>
 
           <div>
-            <Botao onClick={validaCnh} name={`Enviar`}/>
-            <TextoLink name={"Gerar CNH"} path={"/PagGerador"} />
+            <Botao onClick={validaCnh} name={`Enviar`} />
+            <TextoLink name={"Gerar CNH"} path={"/PagGerador/2"} />
           </div>
         </div>
       </div>

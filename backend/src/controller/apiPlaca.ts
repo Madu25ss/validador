@@ -33,6 +33,7 @@ export const validacaoPlaca = async (
   }
 };
 
+
 export const geracaoPlaca = async (
   req: Request,
   res: Response,

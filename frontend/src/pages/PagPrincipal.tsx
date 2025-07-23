@@ -1,6 +1,6 @@
 import React from "react";
-import TabMuiComponent from '../components/TabMuiComponent'
-import ValidadorCpf from "../components/ValidadorCpf";
+import TabMuiComponent from "../components/CompGerar/TabMuiComponent";
+import ValidadorCpf from "../components/CompValidar/ValidadorCpf";
 
 const PagPrincipal = () => {
   return (

@@ -1,11 +1,7 @@
-import { useValidadorStore } from "../store/storeCpf";
-
+import { useHooksStore } from "../store/storeHooks";
 
 export function useValidacaoInputCpf() {
-  const {
-    setSucesso,
-    SetNaoExibir,
-  } = useValidadorStore();
+  const { setSucesso, SetNaoExibir } = useHooksStore();
 
   return (cpf: string) => {
     SetNaoExibir(true);

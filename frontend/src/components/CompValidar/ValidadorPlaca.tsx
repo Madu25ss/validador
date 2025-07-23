@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Validacao from "./Validacao";
-import Accordion from "./Accordion";
-import { useValidadorStore } from "../store/storePlaca";
-import { useValidaPlaca } from "../hooks/useApiPlaca";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Validacao from "../Validacao";
+import Accordion from "../Accordion";
+import { useHooksStore } from "../../store/storeHooks";
+import { useValidaPlaca } from "../../hooks/hooksValidacao/useApiPlaca";
 
 const ValidadorPlaca = () => {
   const {
@@ -22,7 +22,7 @@ const ValidadorPlaca = () => {
     SetNaoExibir,
     retornoJson,
     setRetornoJson,
-  } = useValidadorStore();
+  } = useHooksStore();
 
   const { mutate } = useValidaPlaca();
 
@@ -56,10 +56,16 @@ const ValidadorPlaca = () => {
     }
   };
 
+  // const resetHooks = async () => {
+  //   setResultado(undefined);
+  //   SetNaoExibir(undefined);
+  //   setRetornoJson([""]);
+  // };
+
   return (
     <>
       <TextoDesc
-        text={`Digite a Placa do veículo e clique em "Enviar" para verificar se ela é válida ou não.`}
+        text={`Digite a Placa do veículo e clique em "Enviar" para verificar se ela é Válida ou Inválida.`}
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
@@ -89,7 +95,7 @@ const ValidadorPlaca = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"Gerar PLACA"} path={"/PagGerador"} />
+      <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"} />
     </>
   );
 };

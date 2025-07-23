@@ -1,21 +1,23 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Accordion from "./Accordion";
-import { useGeradorStore } from "../store/storeGeraCnpj";
-import { useGeraCnpj } from "../hooks/useApiCriaCnpj";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Accordion from "../Accordion";
+import { useHooksStore } from "../../store/storeHooks";
+import { useGeraCnpj } from "../../hooks/hooksGeracao/useApiCriaCnpj";
 
 const GeradorCnpj = () => {
   const {
+    setCnpj,
+    setValidaInput,
     setResultado,
     retornoJson,
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
     setSucesso,
-  } = useGeradorStore();
+  } = useHooksStore();
 
   const { mutate } = useGeraCnpj();
 
@@ -23,7 +25,7 @@ const GeradorCnpj = () => {
     SetNaoExibir(true);
 
     mutate(
-      { points: "true"},
+      { points: "true" },
       {
         onSuccess: (dados) => {
           const geraJson = [`CNPJ: ${dados.dataCnpj}`];
@@ -41,6 +43,14 @@ const GeradorCnpj = () => {
     );
   };
 
+  const resetHooks = () => {
+    setResultado(undefined);
+    setCnpj("");
+    setValidaInput(undefined);
+    SetNaoExibir(undefined);
+    setRetornoJson([""]);
+  };
+
   return (
     <>
       <TextoDesc text={`Clique em "Gerar CNPJ" para gerar um CNPJ válido.`} />
@@ -54,7 +64,11 @@ const GeradorCnpj = () => {
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar CNPJ"} path={"/"} />
+      <TextoLink
+        name={"Validar CNPJ"}
+        path={"/validador/1"}
+        onClick={resetHooks}
+      />
     </>
   );
 };

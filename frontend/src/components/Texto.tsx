@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 
 type TextoProps = {
   name: string,
-  path: string
+  path: string,
+  onClick?: () => void,
 };
 
 const TextoLink = (props: TextoProps) => {
@@ -12,7 +13,7 @@ const TextoLink = (props: TextoProps) => {
     <>
       <div className="w-full mt-8">
         <div>
-          <h3 className="text-base text-zinc-600">
+          <h3 className="text-base text-zinc-600" onClick={props.onClick}>
             Ou <Link className="cursor-pointer text-teal-700 hover:underline" to={props.path}> 
             {`${props.name}`}</Link>
           </h3>

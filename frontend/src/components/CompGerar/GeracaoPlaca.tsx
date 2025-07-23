@@ -1,21 +1,23 @@
 import { useState } from "react";
-import Botao from "./Botao";
-import Input from "./Input";
-import TextoLink from "./Texto";
-import TextoDesc from "./TextoDesc";
-import Accordion from "./Accordion";
-import { useGeraPlaca } from "../hooks/useCriaPlaca";
-import { useGeradorStore } from "../store/storeGeraPlaca";
+import Botao from "../Botao";
+import Input from "../Input";
+import TextoLink from "../Texto";
+import TextoDesc from "../TextoDesc";
+import Accordion from "../Accordion";
+import { useGeraPlaca } from "../../hooks/hooksGeracao/useCriaPlaca";
+import { useHooksStore } from "../../store/storeHooks";
 
 const GeradorPlaca = () => {
   const {
+    setPlaca,
+    setValidaInput,
     setResultado,
     retornoJson,
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
     setSucesso,
-  } = useGeradorStore();
+  } = useHooksStore();
 
   const { mutate } = useGeraPlaca();
 
@@ -42,6 +44,14 @@ const GeradorPlaca = () => {
     );
   };
 
+  const resetHooks = () => {
+    setResultado(undefined);
+    setPlaca("");
+    setValidaInput(undefined);
+    SetNaoExibir(undefined);
+    setRetornoJson([""]);
+  };
+
   return (
     <>
       <TextoDesc
@@ -57,7 +67,11 @@ const GeradorPlaca = () => {
           </div>
         </div>
       </div>
-      <TextoLink name={"Validar Placa"} path={"/"} />
+      <TextoLink
+        name={"Validar Placa"}
+        path={"/validador/3"}
+        onClick={resetHooks}
+      />
     </>
   );
 };
