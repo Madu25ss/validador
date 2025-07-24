@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Botao from "../Botao";
 import Input from "../Input";
 import TextoLink from "../Texto";
@@ -14,7 +13,6 @@ const ValidadorPlaca = () => {
     setPlaca,
     resultado,
     setResultado,
-    sucesso,
     setSucesso,
     validaInput,
     setValidaInput,
@@ -56,9 +54,6 @@ const ValidadorPlaca = () => {
     }
   };
 
-  // const resetHooks = async () => {
-  //   SetNaoExibir(undefined);
-  // };
 
   return (
     <>
@@ -72,7 +67,7 @@ const ValidadorPlaca = () => {
               name={"Placa"}
               value={placa}
               onChange={(text: string) => setPlaca(text)}
-              maxLength={8} //sem máscara
+              maxLength={8}
               placeholder="Digite a Placa"
               widthValue={100}
               validacao={resultado}
@@ -90,7 +85,7 @@ const ValidadorPlaca = () => {
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} />
+          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
         </div>
       </div>
       <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"}/>

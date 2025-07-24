@@ -6,7 +6,7 @@ export const validacaoCPF = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> =>  {
   const { cpf, nascimento } = req.body;
 
   if (!cpf) {
@@ -35,7 +35,7 @@ export const geracaoCPF = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
   const { points, state } = req.query;
 
   try {

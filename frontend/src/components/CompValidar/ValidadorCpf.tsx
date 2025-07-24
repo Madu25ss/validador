@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Botao from "../Botao";
 import Input from "../Input";
 import TextoLink from "../Texto";
@@ -8,7 +7,7 @@ import Accordion from "../Accordion";
 import { useValidaCpf } from "../../hooks/hooksValidacao/useApiCpf";
 import { useValidacaoInputCpf } from "../../helper/helperValidaCpf";
 import { useHooksStore } from "../../store/storeHooks";
-import { Link } from "react-router-dom";
+
 
 const ValidadorCpf = () => {
   const {
@@ -24,7 +23,6 @@ const ValidadorCpf = () => {
     setRetornoJson,
     naoExibir,
     SetNaoExibir,
-    sucesso,
     setSucesso,
   } = useHooksStore();
 
@@ -32,7 +30,7 @@ const ValidadorCpf = () => {
   const validarCpfHelper = useValidacaoInputCpf();
 
   const validaCpf = async () => {
-    if (!cpf || cpf.length < 11) {
+    if (!cpf) {
       setValidaInput(false);
       setResultado(false);
     } else {
@@ -71,12 +69,6 @@ const ValidadorCpf = () => {
     }
   };
 
-  // const resetHooks = async () => {
-  //   setResultado(undefined);
-  //   SetNaoExibir(undefined);
-  //   setRetornoJson([""]);
-  // };
-
   return (
     <>
       <TextoDesc
@@ -89,7 +81,7 @@ const ValidadorCpf = () => {
               name={"CPF"}
               value={cpf}
               onChange={(text: string) => setCpf(text)}
-              maxLength={14} //sem máscara
+              maxLength={14} 
               placeholder="Digite o CPF"
               widthValue={100}
               validacao={resultado}
@@ -101,7 +93,7 @@ const ValidadorCpf = () => {
               name={"Data  de Nascimento"}
               value={dataNascimento}
               onChange={(text: string) => setNascimento(text)}
-              maxLength={10} // 8 sem a máscara
+              maxLength={10} 
               placeholder="DD/MM/YYYY"
               widthValue={100}
             />
@@ -117,7 +109,7 @@ const ValidadorCpf = () => {
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} />
+          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
         </div>
       </div>
 

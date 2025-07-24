@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Botao from "../Botao";
 import Input from "../Input";
 import TextoLink from "../Texto";
@@ -7,7 +6,7 @@ import Validacao from "../Validacao";
 import Accordion from "../Accordion";
 import { useHooksStore } from "../../store/storeHooks";
 import { useValidaCnpj } from "../../hooks/hooksValidacao/useApiCNPJ";
-import { useValidacaoInputCnpj } from "../../helper/helperValidaCnpj";
+
 
 const ValidadorCnpj = () => {
   const {
@@ -25,7 +24,6 @@ const ValidadorCnpj = () => {
   } = useHooksStore();
 
   const { mutate } = useValidaCnpj();
-  const validaCnpjHelper = useValidacaoInputCnpj();
 
   const validaCnpj = () => {
     SetNaoExibir(true);
@@ -39,28 +37,29 @@ const ValidadorCnpj = () => {
           { cnpj },
           {
             onSuccess: (dados) => {
-              const geraJson = [
+              let geraJson = [
                 `Razão Social: ${dados.data.razaoSocial} \n`,
                 `Nome Fantasia: ${dados.data.nomeFantasia} \n`,
                 `Natureza Jurídica: ${dados.data.naturezaJuridica} \n`,
                 `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
               ];
 
-              setRetornoJson(geraJson);
-              SetNaoExibir(false);
+              if (dados.data.descricaoSituacaoCadastral === undefined) {
+                geraJson = [];
+                setRetornoJson(geraJson);
+                SetNaoExibir(true);
+              } else {
+                SetNaoExibir(false);
+                setRetornoJson(geraJson);
+              }
+
               setResultado(true);
               setSucesso(true);
             },
             onError: () => {
-              if (resultado === false) {
-                const resultadoViaHelper = validaCnpjHelper(cnpj);
-                setResultado(resultadoViaHelper);
-                SetNaoExibir(true);
-              } else {
-                SetNaoExibir(true);
-                setResultado(false);
-                setSucesso(false);
-              }
+              SetNaoExibir(true);
+              setResultado(false);
+              setSucesso(false);
             },
           }
         );
@@ -81,7 +80,7 @@ const ValidadorCnpj = () => {
               name={"CNPJ"}
               value={cnpj}
               onChange={(text: string) => setCnpj(text)}
-              maxLength={18} //sem máscara
+              maxLength={18} 
               placeholder="Digite o CNPJ"
               widthValue={100}
               validacao={resultado}
@@ -99,7 +98,7 @@ const ValidadorCnpj = () => {
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} />
+          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
         </div>
       </div>
       <TextoLink name={"Gerar CNPJ"} path={"/PagGerador/1"} />

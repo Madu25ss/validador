@@ -6,7 +6,8 @@ export const validacaoCNH = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
+  
   const { number } = req.query;
 
   if (!number) {
@@ -38,7 +39,7 @@ export const geracaoCNH = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
   const { points, allInformation} = req.query;
 
   try {

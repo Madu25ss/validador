@@ -1,5 +1,7 @@
 import { useHooksStore } from "../store/storeHooks";
 
+
+//Helper para validação do cpf a partir do cálculo dos dígitos.
 export function useValidacaoInputCpf() {
   const { setSucesso, SetNaoExibir } = useHooksStore();
 

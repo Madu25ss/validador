@@ -3,7 +3,6 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
-
 type propsValidacao = {
   validacao?: boolean;
 };

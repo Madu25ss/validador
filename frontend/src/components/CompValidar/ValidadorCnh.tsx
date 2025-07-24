@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Botao from "../Botao";
 import Input from "../Input";
 import TextoLink from "../Texto";
@@ -17,8 +16,7 @@ const ValidadorCnh = () => {
     validaInput,
     setValidaInput,
     SetNaoExibir,
-    setRetornoJson,
-  } = useHooksStore();
+    } = useHooksStore();
 
   const { mutate } = useValidaCnh();
 
@@ -46,12 +44,6 @@ const ValidadorCnh = () => {
     }
   };
 
-  // const resetHooks = async () => {
-  //   setResultado(undefined);
-  //   SetNaoExibir(undefined);
-  //   setRetornoJson([""]);
-  // };
-
   return (
     <>
       <TextoDesc
@@ -64,7 +56,7 @@ const ValidadorCnh = () => {
               name={"CNH"}
               value={cnh}
               onChange={(text: string) => setCnh(text)}
-              maxLength={14} //sem máscara
+              maxLength={14}
               placeholder="Digite o CNH"
               widthValue={100}
               validacao={resultado}

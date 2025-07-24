@@ -2,10 +2,10 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import { Box } from "@mui/material";
 import React from "react";
-import ValidadorCpf from "../CompValidar/ValidadorCpf";
-import ValidadorCnpj from "../CompValidar/ValidadorCnpj";
-import ValidadorCnh from "../CompValidar/ValidadorCnh";
-import ValidadorPlaca from "../CompValidar/ValidadorPlaca";
+import GeradorCpf from "./GeradorCPF";
+import GeradorCnpj from "./GeracaoCNPJ";
+import GeradorCnh from "./GeracaoCnh";
+import GeradorPlaca from "./GeracaoPlaca";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHooksStore } from "../../store/storeHooks";
 
@@ -39,10 +39,12 @@ function a11yProps(index: number) {
 }
 
 export default function BasicTabs() {
+
+  //Navegação entre as abas do componente!! Início
   const navigate = useNavigate();
   const { tabIndex } = useParams();
   const [value, setValue] = React.useState(Number(tabIndex) || 0);
-
+  
   const {
     setCpf,
     setNascimento,
@@ -55,31 +57,32 @@ export default function BasicTabs() {
     SetNaoExibir,
     setRetornoJson,
   } = useHooksStore();
-
+  
   React.useEffect(() => {
     setResultado(undefined);
     setSucesso(undefined);
     setValidaInput(undefined);
     SetNaoExibir(undefined);
     setRetornoJson([""]);
-
+    
     setCpf("");
     setNascimento("");
     setCnh("");
     setCnpj("");
     setPlaca("");
   }, [value]);
-
+  
   React.useEffect(() => {
     if (tabIndex && Number(tabIndex) !== value) {
       setValue(Number(tabIndex));
     }
   }, [tabIndex]);
-
+  
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    navigate(`/validador/${newValue}`);
+    navigate(`/PagGerador/${newValue}`);
   };
+  //Navegação entre as abas do componente!! Fim
 
   return (
     <Box
@@ -123,18 +126,18 @@ export default function BasicTabs() {
       </Box>
 
       <CustomTabPanel value={value} index={0}>
-        <ValidadorCpf />
+        <GeradorCpf />
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={1}>
-        <ValidadorCnpj />
+        <GeradorCnpj />
       </CustomTabPanel>
 
       <CustomTabPanel value={value} index={2}>
-        <ValidadorCnh />
+        <GeradorCnh />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={3}>
-        <ValidadorPlaca />
+        <GeradorPlaca />
       </CustomTabPanel>
     </Box>
   );

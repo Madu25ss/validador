@@ -1,12 +1,12 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import { validarCNPJ, geraCnpj } from "../service/validacaoCnpj";
+import { validarCNPJ, geraCnpj, validarCNPJsimples } from "../service/validacaoCnpj";
 
 export const validacaoCNPJ = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
   
   let { cnpj } = req.params;
   
@@ -34,11 +34,34 @@ export const validacaoCNPJ = async (
   }
 };
 
+export const validacaoCNPJsimples = async (
+  req: Request,
+  res: Response,
+  _nxt: NextFunction
+): Promise<any> => {
+  
+  let { cnpj } = req.query;
+  
+
+  if (!cnpj) {
+    res.status(400).json({ error: "O Campo CNPJ é Obrigatório" });
+  }
+
+  try {
+    const resultado = await validarCNPJsimples(String(cnpj));
+    res.status(200).json({
+      data: resultado.data,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao validar CNPJ Simples" },);
+  }
+};
+
 export const geracaoCNPJ = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
   const { points} = req.query;
 
   try {

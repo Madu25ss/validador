@@ -1,21 +1,27 @@
 import { Router } from "express";
 import { geracaoCPF, validacaoCPF } from "../controller/apiCpf";
-import { validacaoCNPJ } from "../controller/apiCnpj";
+import { validacaoCNPJ, validacaoCNPJsimples } from "../controller/apiCnpj";
 import { validacaoCNH, geracaoCNH } from "../controller/apiCnh";
 import { geracaoCNPJ } from "../controller/apiCnpj";
 import { validacaoPlaca, geracaoPlaca } from "../controller/apiPlaca";
 
 const router = Router();
 
+//ROTAS PARA VALIDAÇÃO: 
 router.use("/validarCPF", validacaoCPF);
-// router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
 router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
+router.get("/validaCNPJsimples", validacaoCNPJsimples);
 //RESOLVER NO OVERLOADS MATCHES THIS CALL
 router.get("/validaCNH", validacaoCNH);
+router.get("/validaPlaca", validacaoPlaca);
+
+
+
+//ROTAS PARA GERAÇÃO
+//"NO OVERLOADS MATCHES THIS CALL": resolvido com :Promise<any> => na controller
 router.get("/geraCPF", geracaoCPF);
 router.get("/geraCNPJ", geracaoCNPJ);
 router.get("/geraCNH", geracaoCNH);
-router.get("/validaPlaca", validacaoPlaca);
 router.get("/geraPlaca", geracaoPlaca);
 
 export default router;

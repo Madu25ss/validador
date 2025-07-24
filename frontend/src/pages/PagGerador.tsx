@@ -1,5 +1,5 @@
 import React from "react";
-import TabMuiComponentGerar from "../components/CompValidar/TabMuiComponentGerar";
+import TabMuiComponentGerar from "../components/CompGerar/TabMuiComponentGerar";
 
 const PagGerador = () => {
   return (

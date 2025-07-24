@@ -6,7 +6,7 @@ export const validacaoPlaca = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
   const { plate } = req.query;
 
   if (!plate) {
@@ -37,7 +37,7 @@ export const geracaoPlaca = async (
   req: Request,
   res: Response,
   _nxt: NextFunction
-) => {
+): Promise<any> => {
 
   const {points, state, make, year} = req.query;
 

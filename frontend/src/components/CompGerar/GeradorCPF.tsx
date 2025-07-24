@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Botao from "../Botao";
-import Input from "../Input";
 import TextoLink from "../Texto";
 import TextoDesc from "../TextoDesc";
 import Accordion from "../Accordion";
@@ -30,7 +28,6 @@ const GeradorCpf = () => {
       {
         onSuccess: (dados) => {
           const geraJson = [`CPF: ${dados.dataCpf}`];
-          console.log(dados.dataCpf);
 
           setRetornoJson(geraJson);
           SetNaoExibir(false);
@@ -61,8 +58,8 @@ const GeradorCpf = () => {
           <div className="h-fit">
             <Botao onClick={geraCpf} name={`Gerar CPF`} />
           </div>
-          <div className=" flex flex-col w-full max-w-70 h-full">
-            <Accordion disabled={naoExibir} textInfos={retornoJson} />
+          <div className="h-full flex flex-col w-full max-w-70 justify-end">
+            <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-7"/>
           </div>
         </div>
       </div>
