@@ -1,5 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
+const Api_URL = import.meta.env.VITE_Api_URL;
 
 type DadosEntrada = {
   cnpj: string;
@@ -17,19 +18,16 @@ type DadosResposta = {
   };
 };
 
-
 export const useValidaCnpj = () => {
   return useMutation<DadosResposta, Error, DadosEntrada>({
     mutationFn: async ({ cnpj }) => {
       cnpj = cnpj.replace(/[^\d]+/g, "");
 
-      let resposta = await fetch(`http://localhost:3000/validaCNPJ/${cnpj}`);
+      let resposta = await fetch(`${Api_URL}/validaCNPJ/${cnpj}`);
 
       //Se o cnpj não for verdadeiro (retornando dados verdadeiros), é feita a segunda validação, verificando se o cálculo dos dígitos é válido ou não.
       if (!resposta.ok) {
-        resposta = await fetch(
-          `http://localhost:3000/validaCNPJsimples?cnpj=${cnpj}`
-        );
+        resposta = await fetch(`${Api_URL}/validaCNPJsimples?cnpj=${cnpj}`);
       }
       return resposta.json();
     },

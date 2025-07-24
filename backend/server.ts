@@ -13,6 +13,7 @@ express.urlencoded();
 const whitelist = new Set([
   `http://localhost:${port}`,
   `http://localhost:5173`,
+  `https://validador-e4wg.onrender.com`
 ]);
 
 const corsOptions: CorsOptions = {

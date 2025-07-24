@@ -1,10 +1,8 @@
-import ValidadorCpf from "./components/CompValidar/ValidadorCpf";
-import TesteComponente from "./components/CompValidar/TabMuiComponent";
 import PagPrincipal from "./pages/PagPrincipal";
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PagGerador from "./pages/PagGerador";
 import Root from "./routes/Root";
-import { Children } from "react";
+
 
 function App() {
   return (

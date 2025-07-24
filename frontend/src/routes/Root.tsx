@@ -5,7 +5,7 @@ const Root = () => {
   return (
     <div className="flex h-dvh bg-stone-200 font-[Roboto] py-8 px-16">
       <Outlet />
-      <TextoLinkErro name={"Página Principal"} path="/" />
+      <TextoLinkErro name={"Página Principal"} path="*" />
     </div>
   );
 };

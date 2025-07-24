@@ -1,6 +1,6 @@
-
 import { useMutation } from "@tanstack/react-query";
-const api_url = "http://localhost:3000/validarCPF";
+
+const Api_URL = import.meta.env.VITE_Api_URL;
 
 type DadosEntrada = {
   cpf: string;
@@ -20,7 +20,7 @@ type DadosResposta = {
 export const useValidaCpf = () => {
   return useMutation<DadosResposta, Error, DadosEntrada>({
     mutationFn: async ({ cpf, nascimento }) => {
-      const resposta = await fetch(api_url, {
+      const resposta = await fetch(`${Api_URL}/validarCPF`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

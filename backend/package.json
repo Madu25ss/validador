@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",
-"scripts": {
-  "build": "tsc",
-  "start": "node dist/server.js"
-},
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch server.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
