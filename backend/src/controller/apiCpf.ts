@@ -1,7 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import validarCPF from "../service/validacaoCpf";
-import geraCpf from "../service/criacaoCpf";
+import { validarCPF, geraCpf } from "../service/validacaoCpf";
 
 export const validacaoCPF = async (
   req: Request,
@@ -14,7 +13,6 @@ export const validacaoCPF = async (
     res.status(400).json({ error: "O Campo CPF é Obrigatório" });
   }
 
-  //  else if (!nascimento) {} Validação quando a data de nascimento não for enviada
 
   try {
     const resultado = await validarCPF(cpf, nascimento);
@@ -29,7 +27,6 @@ export const validacaoCPF = async (
       },
     });
   } catch (error) {
-    // console.error('Erro ao validar o CPF: ', error.message);
     res.status(500).json({ error: "Erro ao validar CPF" });
   }
 };

@@ -8,6 +8,7 @@ import { validacaoPlaca, geracaoPlaca } from "../controller/apiPlaca";
 const router = Router();
 
 router.use("/validarCPF", validacaoCPF);
+// router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
 router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
 //RESOLVER NO OVERLOADS MATCHES THIS CALL
 router.get("/validaCNH", validacaoCNH);

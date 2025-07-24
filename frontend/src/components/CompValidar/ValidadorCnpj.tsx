@@ -7,6 +7,7 @@ import Validacao from "../Validacao";
 import Accordion from "../Accordion";
 import { useHooksStore } from "../../store/storeHooks";
 import { useValidaCnpj } from "../../hooks/hooksValidacao/useApiCNPJ";
+import { useValidacaoInputCnpj } from "../../helper/helperValidaCnpj";
 
 const ValidadorCnpj = () => {
   const {
@@ -24,25 +25,18 @@ const ValidadorCnpj = () => {
   } = useHooksStore();
 
   const { mutate } = useValidaCnpj();
+  const validaCnpjHelper = useValidacaoInputCnpj();
 
   const validaCnpj = () => {
-    // function verificaMask(cnpj: string) {
-    //   return (cnpj = cnpj.replace(/\D/g, ""));
-    // }
-
-    const cnpjSemMask = cnpj.replace(/\D/g, "");
-
     SetNaoExibir(true);
     if (!cnpj) {
       setValidaInput(false);
       setResultado(false);
       SetNaoExibir(true);
     } else {
-      // setCnpj(verificaMask(cnpj));
-      // console.log(`cnpj pós verificaMask ${cnpj}`);
       {
         mutate(
-          { cnpjSemMask },
+          { cnpj },
           {
             onSuccess: (dados) => {
               const geraJson = [
@@ -52,16 +46,21 @@ const ValidadorCnpj = () => {
                 `Situação Cadastral: ${dados.data.descricaoSituacaoCadastral} \n`,
               ];
 
-              console.log(dados);
               setRetornoJson(geraJson);
               SetNaoExibir(false);
               setResultado(true);
               setSucesso(true);
             },
             onError: () => {
-              SetNaoExibir(true);
-              setResultado(false);
-              setSucesso(false);
+              if (resultado === false) {
+                const resultadoViaHelper = validaCnpjHelper(cnpj);
+                setResultado(resultadoViaHelper);
+                SetNaoExibir(true);
+              } else {
+                SetNaoExibir(true);
+                setResultado(false);
+                setSucesso(false);
+              }
             },
           }
         );
@@ -69,12 +68,6 @@ const ValidadorCnpj = () => {
       setValidaInput(true);
     }
   };
-
-  // const resetHooks = async () => {
-  //   setResultado(undefined);
-  //   SetNaoExibir(undefined);
-  //   setRetornoJson([""]);
-  // };
 
   return (
     <>

@@ -57,9 +57,7 @@ const ValidadorPlaca = () => {
   };
 
   // const resetHooks = async () => {
-  //   setResultado(undefined);
   //   SetNaoExibir(undefined);
-  //   setRetornoJson([""]);
   // };
 
   return (
@@ -95,7 +93,7 @@ const ValidadorPlaca = () => {
           <Accordion disabled={naoExibir} textInfos={retornoJson} />
         </div>
       </div>
-      <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"} />
+      <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"}/>
     </>
   );
 };

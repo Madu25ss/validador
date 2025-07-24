@@ -1,7 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import validarPlaca from "../service/validacaoPlaca";
-import geraPlaca from "../service/criacaoPlaca";
+import { validarPlaca, geraPlaca } from "../service/validacaoPlaca";
 
 export const validacaoPlaca = async (
   req: Request,

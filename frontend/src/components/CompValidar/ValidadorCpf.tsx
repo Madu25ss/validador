@@ -39,8 +39,9 @@ const ValidadorCpf = () => {
       setValidaInput(true);
     }
 
+    
     if (!dataNascimento) {
-      const resultadoViaHelper = validarCpfHelper(cpf);
+      const resultadoViaHelper = validarCpfHelper(cpf.replace(/[^\d]+/g, ""));
       setResultado(resultadoViaHelper);
       SetNaoExibir(true);
     } else {
@@ -88,7 +89,7 @@ const ValidadorCpf = () => {
               name={"CPF"}
               value={cpf}
               onChange={(text: string) => setCpf(text)}
-              maxLength={11} //sem máscara
+              maxLength={14} //sem máscara
               placeholder="Digite o CPF"
               widthValue={100}
               validacao={resultado}
@@ -100,7 +101,7 @@ const ValidadorCpf = () => {
               name={"Data  de Nascimento"}
               value={dataNascimento}
               onChange={(text: string) => setNascimento(text)}
-              maxLength={8} // 8 sem a máscara
+              maxLength={10} // 8 sem a máscara
               placeholder="DD/MM/YYYY"
               widthValue={100}
             />

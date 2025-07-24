@@ -5,7 +5,7 @@ import { response } from "express";
 
 const apikeyCpf = process.env.APIKEYCPF;
 
-async function validarCPF(cpf: string, nascimento?: string) {
+export async function validarCPF(cpf: string, nascimento?: string) {
   const url = "https://api.cpfhub.io/api/cpf";
 
   const headers = {
@@ -22,4 +22,17 @@ async function validarCPF(cpf: string, nascimento?: string) {
   return response.data;
 }
 
-export default validarCPF;
+
+export async function geraCpf(points: string, state: string) {
+  const url = `https://api.bytools.tech/api/v1/public/geradores/cpf`;
+
+  const headers = {
+    "X-API-KEY": apikeyCpf,
+  };
+
+  const response = await axios.get(url, { params: {points, state}, headers},);
+  return response.data;
+}
+
+export default geraCpf;
+

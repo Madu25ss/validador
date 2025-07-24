@@ -29,8 +29,6 @@ const GeradorCnpj = () => {
       {
         onSuccess: (dados) => {
           const geraJson = [`CNPJ: ${dados.dataCnpj}`];
-          console.log(dados.dataCnpj);
-
           setRetornoJson(geraJson);
           SetNaoExibir(false);
           setResultado(true);

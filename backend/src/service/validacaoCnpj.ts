@@ -1,18 +1,28 @@
-import axios from "axios"
-import 'dotenv';
-import 'dotenv/config';
+import axios from "axios";
+import "dotenv";
+import "dotenv/config";
 import { response } from "express";
 
+const apiKeyToolsCnpj = process.env.APIKEYBYTOOLS;
 
-async function validarCNPJ(cnpj: string) {
+export async function validarCNPJ(cnpj: string) {
+  // console.log(cnpj);
+  // cnpj = cnpj.replace(/[^\d]+/g, "");
+  // console.log(cnpj);
+
   const url = `https://brasilapi.com.br/api/cnpj/v1/${cnpj}`;
 
-  try {
-    const response = await axios.get(url);
-    return response.data;
-  } catch (error: any) {
-    throw new Error("Erro na validação do CNPJ");
-  }
+  const response = await axios.get(url);
+  return response.data;
 }
 
-export default validarCNPJ;
+export async function geraCnpj(points: string) {
+  const url = `https://api.bytools.tech/api/v1/public/geradores/cnpj`;
+
+  const headers = {
+    "X-API-KEY": apiKeyToolsCnpj,
+  };
+
+  const response = await axios.get(url, { params: { points }, headers });
+  return response.data;
+}

@@ -1,7 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import validarCNH from "../service/validacaoCnh";
-import geraCnh from "../service/criacaoCnh";
+import { validarCNH, geraCnh } from "../service/validacaoCnh";
 
 export const validacaoCNH = async (
   req: Request,
