@@ -56,13 +56,13 @@ const GeradorPlaca = () => {
         text={`Clique em "Gerar Placa" para gerar uma Placa válida.`}
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
-        <div className="flex flex-row w-full h-auto space-x-40 ">
-          <div className="h-fit ">
+        <div className="flex flex-row w-full space-x-40">
+          <div className="h-full">
             <Botao onClick={geraPlaca} name={`Gerar Placa`} />
           </div>
 
-          <div className="h-full flex flex-col w-full max-w-70 justify-end">
-            <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-7"/>
+          <div className="h-fit flex flex-col w-full max-w-70">
+            <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-6.5"/>
           </div>
         </div>
       </div>
