@@ -68,7 +68,7 @@ const GeradorPlaca = () => {
       </div>
       <TextoLink
         name={"Validar Placa"}
-        path={"/validador/3"}
+        path={"/3"}
         onClick={resetHooks}
       />
     </>

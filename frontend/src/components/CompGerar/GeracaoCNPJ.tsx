@@ -62,7 +62,7 @@ const GeradorCnpj = () => {
       </div>
       <TextoLink
         name={"Validar CNPJ"}
-        path={"/validador/1"}
+        path={"/1"}
         onClick={resetHooks}
       />
     </>

@@ -79,7 +79,7 @@ export default function BasicTabs() {
   
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
-    navigate(`/validador/${newValue}`);
+    navigate(`/${newValue}`);
   };
   //Navegação entre as abas do componente!! Fim
 
@@ -87,7 +87,9 @@ export default function BasicTabs() {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: "full",
+        maxWidth: "1152px",
+        mixWidth: "472px",
         borderRadius: "8px",
         background: "#FAFAFA",
         boxShadow: "0px 6px 8px rgba(0, 0, 0, 0.2)",

@@ -9,6 +9,8 @@ import GeradorPlaca from "./GeracaoPlaca";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHooksStore } from "../../store/storeHooks";
 
+const tabsValidas = [0, 1, 2, 3];
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -39,12 +41,11 @@ function a11yProps(index: number) {
 }
 
 export default function BasicTabs() {
-
   //Navegação entre as abas do componente!! Início
   const navigate = useNavigate();
   const { tabIndex } = useParams();
   const [value, setValue] = React.useState(Number(tabIndex) || 0);
-  
+
   const {
     setCpf,
     setNascimento,
@@ -57,31 +58,50 @@ export default function BasicTabs() {
     SetNaoExibir,
     setRetornoJson,
   } = useHooksStore();
-  
+
   React.useEffect(() => {
     setResultado(undefined);
     setSucesso(undefined);
     setValidaInput(undefined);
     SetNaoExibir(undefined);
     setRetornoJson([""]);
-    
+
     setCpf("");
     setNascimento("");
     setCnh("");
     setCnpj("");
     setPlaca("");
   }, [value]);
-  
-  React.useEffect(() => {
-    if (tabIndex && Number(tabIndex) !== value) {
-      setValue(Number(tabIndex));
-    }
-  }, [tabIndex]);
-  
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    navigate(`/PagGerador/${newValue}`);
-  };
+
+  // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  //   setValue(newValue);}
+
+    // React.useEffect(() => {
+    //   if (tabIndex !== undefined) {
+    //     if (!tabsValidas.includes(value)) {
+    //       navigate("/erro", { replace: true });
+    //     }
+    //   }
+    // }, [value]);
+    // const maiorValorIndex = 4;
+
+    // if (value <= tabsVali) {
+    //   navigate(`/PagGerador/${newValue}`);
+    // } else {
+    //   navigate(`/`);
+    // }
+
+      React.useEffect(() => {
+        if (tabIndex && Number(tabIndex) !== value) {
+          setValue(Number(tabIndex));
+        }
+      }, [tabIndex]);
+      
+      const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+        navigate(`/PagGerador/${newValue}`);
+      };
+
   //Navegação entre as abas do componente!! Fim
 
   return (

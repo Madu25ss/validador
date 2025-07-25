@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-const Api_URL = import.meta.env.VITE_Api_URL;
+const Api_URL = import.meta.env.VITE_Api_URL ;
 
 type DadosEntrada = {
   points: string;

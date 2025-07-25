@@ -65,7 +65,7 @@ const GeradorCpf = () => {
       </div>
       <TextoLink
         name={"Validar CPF"}
-        path={"/validador/0"}
+        path={"/0"}
         onClick={resetHooks}
       />
     </>

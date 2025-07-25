@@ -8,7 +8,7 @@ const PagGerador = () => {
         <div
           className="
         w-full
-         sm:min-w-3xl 
+         sm: min-w-1xl 
          xl: max-w-6xl"
         >
           <h1 className="text-2xl font-light text-left text-zinc-600">

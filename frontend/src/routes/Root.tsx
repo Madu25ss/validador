@@ -3,9 +3,8 @@ import TextoLinkErro from "../components/TextLinklErro"
 
 const Root = () => {
   return (
-    <div className="flex h-dvh bg-stone-200 font-[Roboto] py-8 px-16">
+    <div className="flex h-dvh bg-stone-200 py-8 px-16">
       <Outlet />
-      <TextoLinkErro name={"Página Principal"} path="*" />
     </div>
   );
 };

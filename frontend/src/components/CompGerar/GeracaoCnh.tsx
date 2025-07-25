@@ -63,7 +63,7 @@ const GeradorCnh = () => {
       </div>
       <TextoLink
         name={"Validar CNH"}
-        path={"/validador/2"}
+        path={"/2"}
         onClick={resetHooks}
       />
     </>
