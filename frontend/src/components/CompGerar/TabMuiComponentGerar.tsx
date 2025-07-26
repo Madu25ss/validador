@@ -44,7 +44,13 @@ export default function BasicTabs() {
   //Navegação entre as abas do componente!! Início
   const navigate = useNavigate();
   const { tabIndex } = useParams();
-  const [value, setValue] = React.useState(Number(tabIndex) || 0);
+  // const [value, setValue] = React.useState(Number(tabIndex) || 0);
+
+
+  const parsedIndex = Number(tabIndex);
+  const isValidTab = tabsValidas.includes(parsedIndex);
+
+    const [value, setValue] = React.useState(isValidTab ? parsedIndex : 0);
 
   const {
     setCpf,
@@ -76,31 +82,43 @@ export default function BasicTabs() {
   // const handleChange = (event: React.SyntheticEvent, newValue: number) => {
   //   setValue(newValue);}
 
-    // React.useEffect(() => {
-    //   if (tabIndex !== undefined) {
-    //     if (!tabsValidas.includes(value)) {
-    //       navigate("/erro", { replace: true });
-    //     }
-    //   }
-    // }, [value]);
-    // const maiorValorIndex = 4;
+  // React.useEffect(() => {
+  //   if (tabIndex !== undefined) {
+  //     if (!tabsValidas.includes(value)) {
+  //       navigate("/erro", { replace: true });
+  //     }
+  //   }
+  // }, [value]);
+  // const maiorValorIndex = 4;
 
-    // if (value <= tabsVali) {
-    //   navigate(`/PagGerador/${newValue}`);
-    // } else {
-    //   navigate(`/`);
-    // }
+  // if (value <= tabsVali) {
+  //   navigate(`/PagGerador/${newValue}`);
+  // } else {
+  //   navigate(`/`);
+  // }
 
-      React.useEffect(() => {
-        if (tabIndex && Number(tabIndex) !== value) {
-          setValue(Number(tabIndex));
-        }
-      }, [tabIndex]);
-      
-      const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-        navigate(`/PagGerador/${newValue}`);
-      };
+  // React.useEffect(() => {
+  //   if (tabIndex && Number(tabIndex) !== value) {
+  //     setValue(Number(tabIndex));
+  //   }
+  // }, [tabIndex]);
+
+  React.useEffect(() => {
+    if (tabIndex !== undefined && !isValidTab) {
+      navigate("/erro", { replace: true });
+    }
+  }, [tabIndex, isValidTab, navigate]);
+
+  React.useEffect(() => {
+    if (isValidTab && parsedIndex !== value) {
+      setValue(parsedIndex);
+    }
+  }, [parsedIndex, isValidTab]);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+    navigate(`/PagGerador/${newValue}`);
+  };
 
   //Navegação entre as abas do componente!! Fim
 

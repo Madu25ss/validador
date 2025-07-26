@@ -7,7 +7,6 @@ import Accordion from "../Accordion";
 import { useHooksStore } from "../../store/storeHooks";
 import { useValidaCnpj } from "../../hooks/hooksValidacao/useApiCNPJ";
 
-
 const ValidadorCnpj = () => {
   const {
     cnpj,
@@ -21,6 +20,7 @@ const ValidadorCnpj = () => {
     SetNaoExibir,
     retornoJson,
     setRetornoJson,
+    setCarregando,
   } = useHooksStore();
 
   const { mutate } = useValidaCnpj();
@@ -32,6 +32,7 @@ const ValidadorCnpj = () => {
       setResultado(false);
       SetNaoExibir(true);
     } else {
+      setCarregando(true)
       {
         mutate(
           { cnpj },
@@ -61,6 +62,9 @@ const ValidadorCnpj = () => {
               setResultado(false);
               setSucesso(false);
             },
+            onSettled: () => {
+              setCarregando(false);
+            },
           }
         );
       }
@@ -75,12 +79,12 @@ const ValidadorCnpj = () => {
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
-          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
+          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start">
             <Input
               name={"CNPJ"}
               value={cnpj}
               onChange={(text: string) => setCnpj(text)}
-              maxLength={18} 
+              maxLength={18}
               placeholder="Digite o CNPJ"
               widthValue={100}
               validacao={resultado}
@@ -88,17 +92,21 @@ const ValidadorCnpj = () => {
               inputVazio={validaInput}
             />
           </div>
-          <div>
+          <div className="mb-3">
             <Validacao validacao={resultado} />
           </div>
 
           <div>
-            <Botao onClick={validaCnpj} name={`Enviar`} />
+            <Botao onClick={validaCnpj} name={`Enviar`} width="16" />
           </div>
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
+          <Accordion
+            disabled={naoExibir}
+            textInfos={retornoJson}
+            height="h-8"
+          />
         </div>
       </div>
       <TextoLink name={"Gerar CNPJ"} path={"/PagGerador/1"} />

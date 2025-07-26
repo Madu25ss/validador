@@ -9,6 +9,8 @@ import ValidadorPlaca from "./ValidadorPlaca";
 import { useNavigate, useParams } from "react-router-dom";
 import { useHooksStore } from "../../store/storeHooks";
 
+const tabsValidas = [0, 1, 2, 3];
+
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
@@ -42,8 +44,13 @@ export default function BasicTabs() {
   //Navegação entre as abas do componente!! Início
   const navigate = useNavigate();
   const { tabIndex } = useParams();
-  const [value, setValue] = React.useState(Number(tabIndex) || 0);
-  
+  // const [value, setValue] = React.useState(Number(tabIndex) || 0);
+
+  const parsedIndex = Number(tabIndex);
+  const isValidTab = tabsValidas.includes(parsedIndex);
+
+  const [value, setValue] = React.useState(isValidTab ? parsedIndex : 0);
+
   const {
     setCpf,
     setNascimento,
@@ -56,34 +63,45 @@ export default function BasicTabs() {
     SetNaoExibir,
     setRetornoJson,
   } = useHooksStore();
-  
+
   React.useEffect(() => {
     setResultado(undefined);
     setSucesso(undefined);
     setValidaInput(undefined);
     SetNaoExibir(undefined);
     setRetornoJson([""]);
-    
+
     setCpf("");
     setNascimento("");
     setCnh("");
     setCnpj("");
     setPlaca("");
   }, [value]);
-  
+
+  // React.useEffect(() => {
+  //   if (tabIndex && Number(tabIndex) !== value) {
+  //     setValue(Number(tabIndex));
+  //   }
+  // }, [tabIndex]);
+
   React.useEffect(() => {
-    if (tabIndex && Number(tabIndex) !== value) {
-      setValue(Number(tabIndex));
+    if (tabIndex !== undefined && !isValidTab) {
+      navigate("/erro", { replace: true });
     }
-  }, [tabIndex]);
-  
+  }, [tabIndex, isValidTab, navigate]);
+
+  React.useEffect(() => {
+    if (isValidTab && parsedIndex !== value) {
+      setValue(parsedIndex);
+    }
+  }, [parsedIndex, isValidTab]);
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
     navigate(`/${newValue}`);
   };
   //Navegação entre as abas do componente!! Fim
 
-  
   return (
     <Box
       sx={{
