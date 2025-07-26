@@ -16,7 +16,8 @@ const ValidadorCnh = () => {
     validaInput,
     setValidaInput,
     SetNaoExibir,
-    } = useHooksStore();
+    setCarregando,
+  } = useHooksStore();
 
   const { mutate } = useValidaCnh();
 
@@ -26,6 +27,7 @@ const ValidadorCnh = () => {
       setResultado(false);
     } else {
       setValidaInput(true);
+      setCarregando(true);
       mutate(
         { cnh },
         {
@@ -39,6 +41,9 @@ const ValidadorCnh = () => {
             setResultado(false);
             setSucesso(false);
           },
+          onSettled: () => {
+            setCarregando(false);
+          },
         }
       );
     }
@@ -51,7 +56,7 @@ const ValidadorCnh = () => {
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
-          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
+          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start">
             <Input
               name={"CNH"}
               value={cnh}
@@ -64,12 +69,12 @@ const ValidadorCnh = () => {
               inputVazio={validaInput}
             />
           </div>
-          <div>
+          <div className="mb-3">
             <Validacao validacao={resultado} />
           </div>
 
           <div>
-            <Botao onClick={validaCnh} name={`Enviar`} />
+            <Botao onClick={validaCnh} name={`Enviar`} width="16" />
             <TextoLink name={"Gerar CNH"} path={"/PagGerador/2"} />
           </div>
         </div>

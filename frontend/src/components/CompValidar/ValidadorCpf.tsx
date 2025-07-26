@@ -7,7 +7,7 @@ import Accordion from "../Accordion";
 import { useValidaCpf } from "../../hooks/hooksValidacao/useApiCpf";
 import { useValidacaoInputCpf } from "../../helper/helperValidaCpf";
 import { useHooksStore } from "../../store/storeHooks";
-
+import { width } from "@fortawesome/free-solid-svg-icons/faCheck";
 
 const ValidadorCpf = () => {
   const {
@@ -24,6 +24,7 @@ const ValidadorCpf = () => {
     naoExibir,
     SetNaoExibir,
     setSucesso,
+    setCarregando,
   } = useHooksStore();
 
   const { mutate } = useValidaCpf();
@@ -37,12 +38,12 @@ const ValidadorCpf = () => {
       setValidaInput(true);
     }
 
-    
     if (!dataNascimento) {
       const resultadoViaHelper = validarCpfHelper(cpf.replace(/[^\d]+/g, ""));
       setResultado(resultadoViaHelper);
       SetNaoExibir(true);
     } else {
+      setCarregando(true);
       mutate(
         { cpf, nascimento: dataNascimento },
         {
@@ -64,6 +65,9 @@ const ValidadorCpf = () => {
             setResultado(false);
             setSucesso(false);
           },
+          onSettled: () => {
+            setCarregando(false);
+          },
         }
       );
     }
@@ -76,12 +80,12 @@ const ValidadorCpf = () => {
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
-          <div className="flex flex-col w-60 space-y-7 h-auto justify-items-start mb-1">
+          <div className="flex flex-col w-60 space-y-7 h-auto justify-items-start">
             <Input
               name={"CPF"}
               value={cpf}
               onChange={(text: string) => setCpf(text)}
-              maxLength={14} 
+              maxLength={14}
               placeholder="Digite o CPF"
               widthValue={100}
               validacao={resultado}
@@ -93,23 +97,27 @@ const ValidadorCpf = () => {
               name={"Data  de Nascimento"}
               value={dataNascimento}
               onChange={(text: string) => setNascimento(text)}
-              maxLength={10} 
+              maxLength={10}
               placeholder="DD/MM/YYYY"
               widthValue={100}
             />
           </div>
 
-          <div>
+          <div className="mb-3">
             <Validacao validacao={resultado} />
           </div>
 
           <div>
-            <Botao onClick={validaCpf} name={`Enviar`} />
+            <Botao onClick={validaCpf} name={`Enviar`} width="16" />
           </div>
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
+          <Accordion
+            disabled={naoExibir}
+            textInfos={retornoJson}
+            height="h-8"
+          />
         </div>
       </div>
 

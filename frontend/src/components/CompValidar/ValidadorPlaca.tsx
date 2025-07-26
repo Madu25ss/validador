@@ -20,13 +20,12 @@ const ValidadorPlaca = () => {
     SetNaoExibir,
     retornoJson,
     setRetornoJson,
+    setCarregando,
   } = useHooksStore();
 
   const { mutate } = useValidaPlaca();
 
   const validaPlaca = () => {
-    console.log(placa);
-    // || placa.length < 7
     if (!placa) {
       setValidaInput(false);
       setResultado(false);
@@ -34,6 +33,7 @@ const ValidadorPlaca = () => {
       setSucesso(false);
     } else {
       setValidaInput(true);
+      setCarregando(true);
       mutate(
         { placa },
         {
@@ -49,11 +49,13 @@ const ValidadorPlaca = () => {
             setResultado(false);
             setSucesso(false);
           },
+          onSettled: () => {
+            setCarregando(false);
+          },
         }
       );
     }
   };
-
 
   return (
     <>
@@ -62,7 +64,7 @@ const ValidadorPlaca = () => {
       />
       <div className="flex flex-row space-x-10 w-full mb-1 ">
         <div className="flex flex-col w-60 h-auto justify-items-start">
-          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start mb-2">
+          <div className="flex flex-col w-60 space-y-10 h-auto justify-items-start">
             <Input
               name={"Placa"}
               value={placa}
@@ -75,20 +77,24 @@ const ValidadorPlaca = () => {
               inputVazio={validaInput}
             />
           </div>
-          <div>
+          <div className="mb-3">
             <Validacao validacao={resultado} />
           </div>
 
           <div>
-            <Botao onClick={validaPlaca} name={`Enviar`} />
+            <Botao onClick={validaPlaca} name={`Enviar`} width="16" />
           </div>
         </div>
 
         <div className=" flex flex-col w-full max-w-70 mt-4.5 ">
-          <Accordion disabled={naoExibir} textInfos={retornoJson} height="h-8"/>
+          <Accordion
+            disabled={naoExibir}
+            textInfos={retornoJson}
+            height="h-8"
+          />
         </div>
       </div>
-      <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"}/>
+      <TextoLink name={"Gerar PLACA"} path={"/PagGerador/3"} />
     </>
   );
 };

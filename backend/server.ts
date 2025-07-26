@@ -6,6 +6,7 @@ import router from "./src/routes/rotasBack";
 
 const app = express();
 const port = process.env.PORT || 5000;
+const urlApi = process.env.Api_URL ;
 
 app.use(express.json());
 express.urlencoded();

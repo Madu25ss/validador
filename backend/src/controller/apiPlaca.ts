@@ -28,7 +28,6 @@ export const validacaoPlaca = async (
     }
   } catch (error) {
     res.status(500).json({ error: "Erro ao validar Placa" });
-    console.log(error);
   }
 };
 
