@@ -10,12 +10,12 @@ export async function validarCPF(cpf: string, nascimento?: string) {
   const url = "https://api.cpfhub.io/api/cpf";
 
   const headers = {
-    "Content-Type": "application/json",
     "x-api-key": apikeyCpf,
+    "Content-Type": "application/json",
   };
 
   const body = {
-    cpf,
+    cpf: cpf,
     birthDate: nascimento,
   };
 

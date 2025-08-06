@@ -7,15 +7,12 @@ import { validacaoPlaca, geracaoPlaca } from "../controller/apiPlaca";
 
 const router = Router();
 
-//ROTAS PARA VALIDAÇÃO: 
-router.use("/validarCPF", validacaoCPF);
+//ROTAS PARA VALIDAÇÃO:
+router.post("/validarCPF", validacaoCPF);
 router.get("/validaCNPJ/:cnpj", validacaoCNPJ);
 router.get("/validaCNPJsimples", validacaoCNPJsimples);
-//RESOLVER NO OVERLOADS MATCHES THIS CALL
 router.get("/validaCNH", validacaoCNH);
 router.get("/validaPlaca", validacaoPlaca);
-
-
 
 //ROTAS PARA GERAÇÃO
 //"NO OVERLOADS MATCHES THIS CALL": resolvido com :Promise<any> => na controller

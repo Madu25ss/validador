@@ -17,7 +17,7 @@ export const validacaoCPF = async (
   try {
     const resultado = await validarCPF(cpf, nascimento);
     res.status(200).json({
-      sucess: true,
+      success: true,
       message: "CPF válido!",
       data: {
         nome: resultado.data.name,
